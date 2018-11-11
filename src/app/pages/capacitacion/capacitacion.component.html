@@ -1,0 +1,80 @@
+<div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarCapacitacion( input.value )" type="text" class="form-control" placeholder="Buscar capacitación...">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor...</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="card-title">Capacitaciones registradas ( <small>{{ _capacitacionService.totalCapacitaciones }}</small> )</h3>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+
+                            <button (click)="crearCapacitacion()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Crear Capacitación
+                      </button>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let capacitacion of capacitaciones">
+                            <td>
+                                <input [(ngModel)]="capacitacion.nombre_capacitacion" type="text" class="form-control" placeholder="Nombre capacitación">
+                            </td>
+                            <td>
+                                <input [(ngModel)]="capacitacion.descripcion_capacitacion" type="text" class="form-control" placeholder="Descripción capacitación">
+                            </td>
+                            <td>
+                                <button (click)="guardarCapacitacion( capacitacion )" class="btn btn-primary">
+                                <i class="fa fa-save"></i>
+                              </button> &nbsp;
+                                <button (click)="borrarCapacitacion( capacitacion )" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                    Anteriores
+                  </button>
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                    Siguientes
+                  </button>
+            </div>
+        </div>
+    </div>
+</div>
