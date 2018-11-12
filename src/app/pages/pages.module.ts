@@ -28,6 +28,9 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
 import { CapacitacionComponent } from './capacitacion/capacitacion.component';
 import { FeriadoLegalComponent } from './feriado-legal/feriado-legal.component';
 import { FeriadoComponent } from './feriado-legal/feriado.component';
+import { LicenciasMedicasComponent } from './licenciaMedica/licencias-medicas.component';
+import { LicenciaComponent } from './licenciaMedica/licencia.component';
+
 
 
 @NgModule({
@@ -46,7 +49,9 @@ import { FeriadoComponent } from './feriado-legal/feriado.component';
         ModalUploadComponent,
         CapacitacionComponent,
         FeriadoLegalComponent,
-        FeriadoComponent
+        FeriadoComponent,
+        LicenciasMedicasComponent,
+        LicenciaComponent
     ],
     exports: [
         DashboardComponent,
@@ -60,7 +65,6 @@ import { FeriadoComponent } from './feriado-legal/feriado.component';
         FormsModule,
         ChartsModule,
         PipesModule
-        // BsDatepickerModule.forRoot()
     ]
 })
 export class PagesModule {}

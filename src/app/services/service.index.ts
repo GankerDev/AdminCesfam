@@ -1,3 +1,4 @@
+export { LicenciaMedicaService } from './licenciaMedica/licencia-medica.service';
 export { FeriadoLegalService } from './feriadoLegal/feriado-legal.service';
 
 export { LoginGuardGuard } from './guards/login-guard.guard';

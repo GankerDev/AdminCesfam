@@ -13,6 +13,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CapacitacionComponent } from './capacitacion/capacitacion.component';
 import { FeriadoLegalComponent } from './feriado-legal/feriado-legal.component';
 import { FeriadoComponent } from './feriado-legal/feriado.component';
+import { LicenciaMedicaComponent } from './licencia-medica/licencia-medica.component';
 
 
 const pagesRoutes: Routes = [
@@ -33,6 +34,7 @@ const pagesRoutes: Routes = [
             { path: 'capacitacion',  component: CapacitacionComponent, data: {titulo: 'Mantenimiento de capacitaciones'}},
             { path: 'feriado-legal',  component: FeriadoLegalComponent, data: {titulo: 'Mantenimiento de feriados legales'}},
             { path: 'feriado/:id',  component: FeriadoComponent, data: {titulo: 'Actualizar feriado legal'}},
+            { path: 'licencia-medica',  component: LicenciaMedicaComponent, data: {titulo: 'Mantenimiento de licencias médicas'}},
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }

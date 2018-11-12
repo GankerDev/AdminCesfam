@@ -11,7 +11,8 @@ import {
   LoginGuardGuard,
   SubirArchivoService,
   CapacitacionService,
-  FeriadoLegalService
+  FeriadoLegalService,
+  LicenciaMedicaService
 } from './service.index';
 
 
@@ -29,7 +30,8 @@ import {
     SubirArchivoService,
     ModalUploadService,
     CapacitacionService,
-    FeriadoLegalService
+    FeriadoLegalService,
+    LicenciaMedicaService
   ],
   declarations: []
 })
