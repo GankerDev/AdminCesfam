@@ -1,14 +1,15 @@
-<!-- <div class="row">
+<div class="row animated fadeIn">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
 
-                <input #input (keyup)="buscarCapacitacion( input.value )" type="text" class="form-control" placeholder="Buscar capacitación...">
+                <input #input (keyup)="buscarPermiso( input.value )" type="text" class="form-control" placeholder="Buscar permiso...">
 
             </div>
         </div>
     </div>
-</div> -->
+</div>
+
 <div class="row animated fadeIn" *ngIf="cargando">
     <div class="col-sm-12">
         <div class="alert alert-warning text-center">
@@ -27,54 +28,61 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <h3 class="card-title">Feriados legales ( <small>{{ _feriadoLegalService.totalferiados }}</small> )</h3>
+                        <h3 class="card-title">Permisos( <small>{{ totalRegistros }}</small> )</h3>
                     </div>
                     <div class="col-6">
                         <div class="text-right">
 
-                            <button [routerLink]="['/feriado', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                            <button [routerLink]="['/permiso', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                       <i class="fa fa-plus"></i>
-                      Crear Feriado Legal
+                      Crear Permiso
                     </button>
                         </div>
                     </div>
                 </div>
 
+
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th>Fecha</th>
                             <th>Días fijos</th>
-                            <th>Días acumulados</th>
-                            <th>Fecha inicio</th>
-                            <th>Fecha termino</th>
+                            <th>Tiempo permiso</th>
                             <th>Días restantes</th>
+                            <th>Días adm fijos</th>
+                            <th>Días adm acumulados</th>
+                            <th>Tipo permiso</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let feriado of feriados">
-                            <td>{{ feriado.dias_vacaciones_fijos }}</td>
-                            <td>{{ feriado.dias_vacaciones_acumulados }}</td>
-                            <td>{{ feriado.fecha_inicio_vacaciones | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ feriado.fecha_termino_vacaciones | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ feriado.dias_vacaciones_restantes }}</td>
+                        <tr *ngFor="let permiso of permisos">
+                            <td> {{ permiso.fecha | date:'yyyy-MM-dd' }} </td>
+                            <td> {{ permiso.dias_fijos }} </td>
+                            <td> {{ permiso.tiempo_permiso }} </td>
+                            <td> {{ permiso.dias_restantes }} </td>
+                            <td> {{ permiso.dias_adm_fijos }} </td>
+                            <td> {{ permiso.dias_adm_acumulados }} </td>
+                            <td> {{ permiso.tipoPermisos.nombre | lowercase }} </td>
                             <td>
-                                <button [routerLink]="['/feriado', feriado._id ]" class="btn btn-primary">
+                                <button [routerLink]="['/permiso', permiso._id ]" class="btn btn-primary">
                               <i class="fa fa-save"></i>
                             </button> &nbsp;
-                                <button (click)="borrarFeriado( feriado )" class="btn btn-danger">
+                                <button (click)="borrarPermiso( permiso )" class="btn btn-danger">
                               <i class="fa fa-trash-o"></i>
                             </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                <div *ngIf="totalRegistros > 5">
+                    <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
                     Anteriores
                   </button>
-                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                    <button (click)="cambiarDesde(5)" class="btn btn-secondary">
                     Siguientes
                   </button>
+                </div>
             </div>
         </div>
     </div>

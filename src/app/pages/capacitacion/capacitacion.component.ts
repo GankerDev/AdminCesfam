@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CapacitacionService } from '../../services/service.index';
-import { Capacitacion } from 'src/app/models/capacitacion.models';
+import { Capacitacion } from '../../models/capacitacion.models';
 
 declare var swal: any;
 

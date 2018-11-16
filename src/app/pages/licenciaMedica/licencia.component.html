@@ -4,26 +4,50 @@
             <h3 class="box-title m-b-0">Formulario</h3>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
-                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarFeriado(f)">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarLicencia(f)">
                         <div class="form-group">
-                            <label>Días fijos</label>
-                            <input [(ngModel)]="feriado.dias_vacaciones_fijos " name="dias_vacaciones_fijos" type="number" class="form-control" required>
+                            <label>Cantidad licencias pedidas</label>
+                            <input [(ngModel)]="licencia.cant_licencias_pedidas " name="cant_licencias_pedidas" type="number" class="form-control" required min="0">
                         </div>
 
                         <div class="form-group">
-                            <label>Fecha inicio vacaciones</label>
-                            <input [ngModel]="feriado.fecha_inicio_vacaciones | date:'yyyy-MM-dd'" (ngModelChange)="feriado.fecha_inicio_vacaciones = $event" name="fecha_inicio_vacaciones" type="date" class="form-control">
-
+                            <label>Dias de licencia</label>
+                            <input [(ngModel)]="licencia.cant_dias_licencia" name="cant_dias_licencia" type="number" class="form-control" min="0" required>
                         </div>
                         <div class="form-group">
-                            <label>Fecha termino vacaciones</label>
-                            <input [ngModel]="feriado.fecha_termino_vacaciones | date:'yyyy-MM-dd'" (ngModelChange)="feriado.fecha_termino_vacaciones = $event" name="fecha_termino_vacaciones" type="date" class="form-control">
+                            <div class="col-12">
+                                <label>Desde</label>
+                                <input [ngModel]="licencia.desde | date:'yyyy-MM-dd'" (ngModelChange)="licencia.desde = $event" name="desde" type="date" class="form-control">
+                                <label>Hasta</label>
+                                <input [ngModel]="licencia.hasta | date:'yyyy-MM-dd'" (ngModelChange)="licencia.hasta = $event" name="hasta" type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Número de licencia</label>
+                            <input [(ngModel)]="licencia.numero_licencia" name="numero_licencia" type="number" class="form-control" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Entidad pagadora</label>
+                            <input [(ngModel)]="licencia.entidad_pagadora" name="entidad_pagadora" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Renta 1</label>
+                            <input [(ngModel)]="licencia.renta1" name="renta1" type="number" class="form-control" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Renta 2</label>
+                            <input [(ngModel)]="licencia.renta2" name="renta2" type="number" class="form-control" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Renta 3</label>
+                            <input [(ngModel)]="licencia.renta3" name="renta3" type="number" class="form-control" min="0">
                         </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                               <i class="fa fa-save"></i>
-                              Guardar</button>
-                            <a routerLink="/feriado-legal" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+                              Guardar
+                            </button>
+                            <a routerLink="/licencia-medica" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
                         </div>
                     </form>
                 </div>

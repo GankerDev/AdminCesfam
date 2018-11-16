@@ -22,11 +22,11 @@ export class SidebarService {
      submenu: [
        {titulo: 'Usuarios', url: '/usuarios'},
        {titulo: 'Capacitación', url: '/capacitacion'},
-       {titulo: 'Categoría', url: '/categoria'},
+       {titulo: 'Categoría', url: '/categorias'},
        {titulo: 'Feriado legal', url: '/feriado-legal'},
-       {titulo: 'Funcionarios', url: '/funcionario'},
+       {titulo: 'Funcionarios', url: '/funcionarios'},
        {titulo: 'Licencias medicas', url: '/licencia-medica'},
-       {titulo: 'Permisos', url: '/permiso'},
+       {titulo: 'Permisos', url: '/permisos'},
        {titulo: 'Tipo Categoría', url: '/tipo-categoria'},
        {titulo: 'Tipo Contrato', url: '/tipo-contrato'},
        {titulo: 'Tipo Permiso', url: '/tipo-permiso'}

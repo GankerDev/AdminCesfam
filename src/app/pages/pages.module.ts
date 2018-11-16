@@ -30,6 +30,15 @@ import { FeriadoLegalComponent } from './feriado-legal/feriado-legal.component';
 import { FeriadoComponent } from './feriado-legal/feriado.component';
 import { LicenciasMedicasComponent } from './licenciaMedica/licencias-medicas.component';
 import { LicenciaComponent } from './licenciaMedica/licencia.component';
+import { TipoCategoriaComponent } from './tipo-categoria/tipo-categoria.component';
+import { TipoContratoComponent } from './tipo-contrato/tipo-contrato.component';
+import { TipoPermisoComponent } from './tipo-permiso/tipo-permiso.component';
+import { CategoriasComponent } from './categoria/categorias.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { PermisoComponent } from './permiso/permiso.component';
+import { PermisosComponent } from './permiso/permisos.component';
+import { FuncionarioComponent } from './funcionario/funcionario.component';
+import { FuncionariosComponent } from './funcionario/funcionarios.component';
 
 
 
@@ -51,7 +60,16 @@ import { LicenciaComponent } from './licenciaMedica/licencia.component';
         FeriadoLegalComponent,
         FeriadoComponent,
         LicenciasMedicasComponent,
-        LicenciaComponent
+        LicenciaComponent,
+        TipoCategoriaComponent,
+        TipoContratoComponent,
+        TipoPermisoComponent,
+        CategoriasComponent,
+        CategoriaComponent,
+        PermisoComponent,
+        PermisosComponent,
+        FuncionarioComponent,
+        FuncionariosComponent
     ],
     exports: [
         DashboardComponent,

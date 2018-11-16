@@ -1,3 +1,6 @@
+export { FuncionarioService } from './funcionario/funcionario.service';
+export { TipoPermisoService } from './tipoPermiso/tipo-permiso.service';
+export { TipoCategoriaService } from './tipoCategoria/tipo-categoria.service';
 export { LicenciaMedicaService } from './licenciaMedica/licencia-medica.service';
 export { FeriadoLegalService } from './feriadoLegal/feriado-legal.service';
 

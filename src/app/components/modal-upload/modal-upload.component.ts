@@ -15,9 +15,7 @@ export class ModalUploadComponent implements OnInit {
   constructor(
     public _subirArchivoService: SubirArchivoService,
     public _modalUploadService: ModalUploadService
-   ) {
-    console.log('Modal listo');
-  }
+   ) { }
 
   ngOnInit() {
   }

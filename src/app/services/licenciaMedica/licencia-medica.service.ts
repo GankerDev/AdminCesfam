@@ -26,6 +26,7 @@ export class LicenciaMedicaService {
     return this.http.get(url)
             .pipe(map((resp: any) => {
               this.totalLicencias = resp.total;
+              console.log(resp);
               return resp.licenciasMedicas;
             }));
   }
@@ -44,7 +45,10 @@ export class LicenciaMedicaService {
   }
 
   guardarLicencia( licenciaMedica: LicenciaMedica ) {
-    let url = URL_SERVICIOS + '/feriado-legal';
+    let promedio;
+    promedio = (licenciaMedica.renta1 + licenciaMedica.renta2 + licenciaMedica.renta3) / 3;
+    licenciaMedica.promedio = promedio;
+    let url = URL_SERVICIOS + '/licencia-medica';
     if ( licenciaMedica._id ) {
       // actualizando
       url += '/' + licenciaMedica._id;

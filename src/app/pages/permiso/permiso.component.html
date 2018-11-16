@@ -1,0 +1,45 @@
+<div class="row animated fadeIn">
+    <div class="col-md-6 ">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Permiso</h3>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarPermiso(f)">
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <input [ngModel]="permiso.fecha | date:'yyyy-MM-dd' " (ngModelChange)=" permiso.fecha = $event" name="fecha" type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Días fijos</label>
+                            <input [(ngModel)]="permiso.dias_fijos " name="dias_fijos" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tiempo permiso</label>
+                            <input [(ngModel)]="permiso.tiempo_permiso " name="tiempo_permiso" type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Días administrativos fijos</label>
+                            <input [(ngModel)]="permiso.dias_adm_fijos " name="dias_adm_fijos" type="number" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo Permiso</label>
+                            <select [(ngModel)]="permiso.tipoPermisos" name="tipoPermisos" class="form-control" required>
+                                <option value="">Seleccione tipo de permiso</option>
+                                <option *ngFor="let tipoPermiso of tipoPermisos" [value]="tipoPermiso._id">
+                                    {{ tipoPermiso.nombre }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                                <i class="fa fa-save"></i>
+                                Guardar</button>
+                            <a routerLink="/permisos" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -13,8 +13,17 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CapacitacionComponent } from './capacitacion/capacitacion.component';
 import { FeriadoLegalComponent } from './feriado-legal/feriado-legal.component';
 import { FeriadoComponent } from './feriado-legal/feriado.component';
-import { LicenciaMedicaComponent } from './licencia-medica/licencia-medica.component';
-
+import { LicenciasMedicasComponent } from './licenciaMedica/licencias-medicas.component';
+import { LicenciaComponent } from './licenciaMedica/licencia.component';
+import { TipoCategoriaComponent } from './tipo-categoria/tipo-categoria.component';
+import { TipoContratoComponent } from './tipo-contrato/tipo-contrato.component';
+import { TipoPermisoComponent } from './tipo-permiso/tipo-permiso.component';
+import { CategoriasComponent } from './categoria/categorias.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { PermisoComponent } from './permiso/permiso.component';
+import { PermisosComponent } from './permiso/permisos.component';
+import { FuncionariosComponent } from './funcionario/funcionarios.component';
+import { FuncionarioComponent } from './funcionario/funcionario.component';
 
 const pagesRoutes: Routes = [
     {
@@ -34,7 +43,17 @@ const pagesRoutes: Routes = [
             { path: 'capacitacion',  component: CapacitacionComponent, data: {titulo: 'Mantenimiento de capacitaciones'}},
             { path: 'feriado-legal',  component: FeriadoLegalComponent, data: {titulo: 'Mantenimiento de feriados legales'}},
             { path: 'feriado/:id',  component: FeriadoComponent, data: {titulo: 'Actualizar feriado legal'}},
-            { path: 'licencia-medica',  component: LicenciaMedicaComponent, data: {titulo: 'Mantenimiento de licencias médicas'}},
+            { path: 'licencia-medica',  component: LicenciasMedicasComponent, data: {titulo: 'Mantenimiento de licencias médicas'}},
+            { path: 'licencia/:id',  component: LicenciaComponent, data: {titulo: 'Actualizar licencia médica'}},
+            { path: 'tipo-categoria',  component: TipoCategoriaComponent, data: {titulo: 'Mantenimiento Tipo Categoría'}},
+            { path: 'tipo-contrato',  component: TipoContratoComponent, data: {titulo: 'Mantenimiento Tipo Contrato'}},
+            { path: 'tipo-permiso',  component: TipoPermisoComponent, data: {titulo: 'Mantenimiento Tipo Permiso'}},
+            { path: 'categorias',  component: CategoriasComponent, data: {titulo: 'Mantenimiento Categorías'}},
+            { path: 'categoria/:id',  component: CategoriaComponent, data: {titulo: 'Mantenimiento Categoría'}},
+            { path: 'permisos',  component: PermisosComponent, data: {titulo: 'Mantenimiento Permisos'}},
+            { path: 'permiso/:id',  component: PermisoComponent, data: {titulo: 'Mantenimiento Permisos'}},
+            { path: 'funcionarios',  component: FuncionariosComponent, data: {titulo: 'Mantenimiento Funcionarios'}},
+            { path: 'funcionario/:id',  component: FuncionarioComponent, data: {titulo: 'Mantenimiento Funcionarios'}},
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }

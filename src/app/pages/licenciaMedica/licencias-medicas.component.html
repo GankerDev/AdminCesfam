@@ -16,42 +16,47 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <h3 class="card-title">Licencias Médicas ( <small>{{ _licenciaMedicaService.totalferiados }}</small> )</h3>
+                        <h3 class="card-title">Licencias Médicas ( <small>{{ totalRegistros }}</small> )</h3>
                     </div>
                     <div class="col-6">
                         <div class="text-right">
 
-                            <button [routerLink]="['/feriado', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                            <button [routerLink]="['/licencia', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                     <i class="fa fa-plus"></i>
-                    Crear Feriado Legal
+                    Crear Licencia Médica
                   </button>
                         </div>
                     </div>
                 </div>
-
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Días fijos</th>
-                            <th>Días acumulados</th>
-                            <th>Fecha inicio</th>
-                            <th>Fecha termino</th>
-                            <th>Días restantes</th>
+                            <th>Cantidad de licencias pedidas</th>
+                            <th>Cantidad dias licencia</th>
+                            <th>Desde</th>
+                            <th>Hasta</th>
+                            <th>Número licencia</th>
+                            <th>Entidad pagadora</th>
+                            <th>Rentas</th>
+                            <th>Promedio</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let feriado of feriados">
-                            <td>{{ feriado.dias_vacaciones_fijos }}</td>
-                            <td>{{ feriado.dias_vacaciones_acumulados }}</td>
-                            <td>{{ feriado.fecha_inicio_vacaciones }}</td>
-                            <td>{{ feriado.fecha_termino_vacaciones }}</td>
-                            <td>{{ feriado.dias_vacaciones_restantes }}</td>
+                        <tr *ngFor="let licencia of licencias">
+                            <td>{{ licencia.cant_licencias_pedidas }}</td>
+                            <td>{{ licencia.cant_dias_licencia }}</td>
+                            <td>{{ licencia.desde | date:'yyyy-MM-dd' }}</td>
+                            <td>{{ licencia.hasta | date:'yyyy-MM-dd' }}</td>
+                            <td>{{ licencia.numero_licencia }}</td>
+                            <td>{{ licencia.entidad_pagadora }} </td>
+                            <td>{{ licencia.renta1 }} | {{ licencia.renta2 }} | {{ licencia.renta3 }} </td>
+                            <td>{{ licencia.promedio }}</td>
                             <td>
-                                <button [routerLink]="['/feriado', feriado._id ]" class="btn btn-primary">
+                                <button [routerLink]="['/licencia', licencia._id ]" class="btn btn-primary">
                             <i class="fa fa-save"></i>
                           </button> &nbsp;
-                                <button (click)="borrarFeriado( feriado )" class="btn btn-danger">
+                                <button (click)="borrarLicencia( licencia )" class="btn btn-danger">
                             <i class="fa fa-trash-o"></i>
                           </button>
                             </td>

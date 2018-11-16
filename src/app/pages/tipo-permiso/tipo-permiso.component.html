@@ -1,0 +1,80 @@
+<!-- Buscar   
+  <div class="row animated fadeIn">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+
+                <input #input (keyup)="buscarTipoContrato( input.value )" type="text" class="form-control" placeholder="Buscar tipo contrato...">
+
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor...</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="card-title">Tipos de permisos registrados ( <small>{{ totalRegistros }}</small> )</h3>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+
+                            <button (click)="crearTipoPermiso()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                    <i class="fa fa-plus"></i>
+                    Crear Tipo Permiso
+                  </button>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let tipoPermiso of tipoPermisos">
+                            <td>
+                                <input [ngModel]="tipoPermiso.nombre | lowercase  " (ngModelChange)="tipoPermiso.nombre = $event" type="text" class="form-control" placeholder="Nombre tipo permiso...">
+                            </td>
+                            <td>
+                                <button (click)="guardarTipoPermiso( tipoPermiso )" class="btn btn-primary">
+                            <i class="fa fa-save"></i>
+                          </button> &nbsp;
+                                <button (click)="borrarTipoPermiso( tipoPermiso )" class="btn btn-danger">
+                            <i class="fa fa-trash-o"></i>
+                          </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="totalRegistros > 5">
+                    <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                  Anteriores
+                </button>
+                    <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                  Siguientes
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
