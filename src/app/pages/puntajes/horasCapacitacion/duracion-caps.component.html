@@ -1,0 +1,64 @@
+<p>
+    duracion-caps works!
+</p>
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor...</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="card-title">Duración capacitación</h3>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+
+                            <button [routerLink]="['/horas-cap', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                          <i class="fa fa-plus"></i>
+                          Crear
+                          </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mínimo</th>
+                            <th>Máximo</th>
+                            <th>Puntaje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let horas of duracionCaps ">
+                            <td> {{ horas.min }} </td>
+                            <td>{{ horas.max }}</td>
+                            <td> {{ horas.puntaje }} </td>
+                            <td>
+                                <button [routerLink]="['/horas-cap', horas._id ]" class="btn btn-primary">
+                                  <i class="fa fa-save"></i>
+                              </button> &nbsp;
+                                <button (click)="borrarDuracionCap( horas )" class="btn btn-danger">
+                                  <i class="fa fa-trash-o"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

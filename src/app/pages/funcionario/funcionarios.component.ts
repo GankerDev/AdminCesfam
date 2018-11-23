@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Permiso } from 'src/app/models/permiso.models';
 import { FuncionarioService } from '../../services/service.index';
 import { Funcionario } from '../../models/funcionario.models';
+import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 declare var swal: any;
 
@@ -12,26 +12,30 @@ declare var swal: any;
 })
 export class FuncionariosComponent implements OnInit {
 
-  funcionarios: Permiso[] = [];
+  funcionarios: Funcionario[] = [];
   cargando: boolean = true;
   desde: number = 0;
   totalRegistros: number = 0;
 
   constructor(
-    public _funcionarioService:  FuncionarioService
+    public _funcionarioService:  FuncionarioService,
+    public _modalUploadService: ModalUploadService
   ) { }
 
   ngOnInit() {
     this.cargarFuncionarios();
+    this._modalUploadService.notificacion
+        .subscribe( resp =>  this.cargarFuncionarios());
   }
 
   cargarFuncionarios() {
     this.cargando = true;
-    this._funcionarioService.cargarFuncionarios(this.desde)
+    this._funcionarioService.cargarFuncionarios(this.desde, false)
         .subscribe( funcionarios => {
           this.totalRegistros = this._funcionarioService.totalFuncionarios;
           this.cargando = false;
           this.funcionarios = funcionarios;
+          console.log(funcionarios);
         });
 
   }
@@ -49,7 +53,7 @@ export class FuncionariosComponent implements OnInit {
   borrarFuncionario( funcionario: Funcionario ) {
         swal({
           title: '¿Esta seguro?',
-          text: 'Esta a punto de borrar un funcionario ',
+          text: 'Esta a punto de borrar a ' + funcionario.nombre,
           icon: 'warning',
           buttons: true,
           dangerMode: true,
@@ -75,6 +79,11 @@ export class FuncionariosComponent implements OnInit {
 
     this.desde += valor;
     this.cargarFuncionarios();
+  }
+
+  mostrarModal( id: string ) {
+    this._modalUploadService.mostrarModal( 'usuario', id );
+
   }
 
 }

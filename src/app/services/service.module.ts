@@ -12,7 +12,9 @@ import {
   SubirArchivoService,
   CapacitacionService,
   FeriadoLegalService,
-  LicenciaMedicaService
+  LicenciaMedicaService,
+  CapNivelTecService,
+  HorasCapService
 } from './service.index';
 
 
@@ -31,7 +33,9 @@ import {
     ModalUploadService,
     CapacitacionService,
     FeriadoLegalService,
-    LicenciaMedicaService
+    LicenciaMedicaService,
+    CapNivelTecService,
+    HorasCapService
   ],
   declarations: []
 })

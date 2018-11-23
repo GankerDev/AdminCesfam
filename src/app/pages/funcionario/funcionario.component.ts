@@ -18,9 +18,9 @@ import { TipoContrato } from '../../models/tipoContrato.models';
 })
 export class FuncionarioComponent implements OnInit {
 
-  categoria: Categoria[] = [];
-  capacitacion: Capacitacion[] = [];
-  tipoContrato: TipoContrato[] = [];
+  categorias: Categoria[] = [];
+  capacitaciones: Capacitacion[] = [];
+  tipoContratos: TipoContrato[] = [];
   funcionario: Funcionario = new Funcionario();
 
   constructor(
@@ -42,11 +42,11 @@ export class FuncionarioComponent implements OnInit {
 
   ngOnInit() {
     this._categoriaService.cargarCategorias()
-        .subscribe( categoria => this.categoria = categoria );
+        .subscribe( categoria => this.categorias = categoria );
     this._capacitacionService.cargarCapacitaciones()
-        .subscribe( capacitacion => this.capacitacion = capacitacion );
+        .subscribe( capacitacion => this.capacitaciones = capacitacion );
     this._tipoContratoservice.cargarTipoContrato()
-        .subscribe( tipoContrato => this.tipoContrato = tipoContrato );
+        .subscribe( tipoContrato => this.tipoContratos = tipoContrato );
   }
 
   cargarFuncionario( id: string) {

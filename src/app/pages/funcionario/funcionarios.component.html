@@ -22,330 +22,80 @@
     </div>
 </div>
 
-<div class="row animated fadeIn" *ngIf="!cargando">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-6">
-                        <h3 class="card-title">Funcionarios ( <small>{{ totalRegistros }}</small> )</h3>
-                    </div>
-                    <div class="col-6">
-                        <div class="text-right">
+<div class="row animated fadeIn">
+    <div class="card" *ngIf="!cargando">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <h3 class="card-title">Funcionarios ( <small>{{ totalRegistros }}</small> )</h3>
+                </div>
+                <div class="col-6">
+                    <div class="text-right">
 
-                            <button [routerLink]="['/funcionario', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                        <button [routerLink]="['/funcionario', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                     <i class="fa fa-plus"></i>
                     Crear Funcionario
                   </button>
-                        </div>
                     </div>
                 </div>
-
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Imágen</th>
-                            <th>Nombre</th>
-                            <th>Rut</th>
-                            <th>Fecha nacimiento</th>
-                            <th>Dirección</th>
-                            <th>Email</th>
-                            <th>Teléfono</th>
-                            <th>Fecha inicio laboral</th>
-                            <th>Puntaje capacitación acumulado</th>
-                            <th>Total puntaje</th>
-                            <th>Nivel actual</th>
-                            <th>Categoria</th>
-                            <th>Capacitaciones</th>
-                            <th>Tipo Contrato</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let funcionario of funcionarios">
-                            <td> {{ funcionario.fecha | date:'yyyy-MM-dd' }} </td>
-                            <td> {{ funcionario.dias_fijos }} </td>
-                            <td> {{ funcionario.tiempo_funcionario }} </td>
-                            <td> {{ funcionario.dias_restantes }} </td>
-                            <td> {{ funcionario.dias_adm_fijos }} </td>
-                            <td> {{ funcionario.dias_adm_acumulados }} </td>
-                            <td> {{ funcionario.tipoPermisos.nombre | lowercase }} </td>
-                            <td> {{ funcionario.fecha | date:'yyyy-MM-dd' }} </td>
-                            <td> {{ funcionario.dias_fijos }} </td>
-                            <td> {{ funcionario.tiempo_funcionario }} </td>
-                            <td> {{ funcionario.dias_restantes }} </td>
-                            <td> {{ funcionario.dias_adm_fijos }} </td>
-                            <td> {{ funcionario.dias_adm_acumulados }} </td>
-                            <td> {{ funcionario.tipoPermisos.nombre | lowercase }} </td>
-                            <td>
-                                <button [routerLink]="['/permiso', permiso._id ]" class="btn btn-primary">
+            </div>
+            <table id="demo-foo-pagination" class="footable table m-b-0 toggle-arrow-tiny" data-page-size="5">
+                <thead>
+                    <tr>
+                        <th data-toggle="true"> Imágen </th>
+                        <th> Nombre </th>
+                        <th> Rut </th>
+                        <th> Email </th>
+                        <th></th>
+                        <th data-hide="all">Teléfono</th>
+                        <th data-hide="all"> Fecha de nacimiento </th>
+                        <th data-hide="all"> Dirección </th>
+                        <th data-hide="all"> Fecha inicio laboral</th>
+                        <th data-hide="all"> Puntaje capacitación acumulado </th>
+                        <th data-hide="all"> Total puntaje </th>
+                        <th data-hide="all"> Nivel actual </th>
+                        <th data-hide="all"> Categoría </th>
+                        <th data-hide="all"> Capacitaciones </th>
+                        <th data-hide="all"> Tipo contrato </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let funcionario of funcionarios">
+                        <td>
+                            <img (click)="mostrarModal( funcionario._id )" [src]="funcionario.img | archivos" class="img-50 img-circle pointer">
+                        </td>
+                        <td>{{ funcionario.nombre }}</td>
+                        <td>{{ funcionario.rut }}</td>
+                        <td>{{ funcionario.email }}</td>
+                        <td>
+                            <button [routerLink]="['/funcionario', funcionario._id]" class="btn btn-primary">
                             <i class="fa fa-save"></i>
-                          </button> &nbsp;
-                                <button (click)="borrarPermiso( permiso )" class="btn btn-danger">
+                        </button> &nbsp;
+                            <button (click)="borrarFuncionario( funcionario )" class="btn btn-danger">
                             <i class="fa fa-trash-o"></i>
-                          </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div *ngIf="totalRegistros > 5">
-                    <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
-                  Anteriores
-                </button>
-                    <button (click)="cambiarDesde(5)" class="btn btn-secondary">
-                  Siguientes
-                </button>
-                </div>
+                        </button>
+                        </td>
+                        <td>{{ funcionario.telefono }}</td>
+                        <td>{{ funcionario.fecha_nacimiento | date:'dd-MM-yyyy' }}</td>
+                        <td>{{ funcionario.direccion }}</td>
+                        <td>{{ funcionario.fecha_inicio_laboral | date:'dd-MM-yyyy' }}</td>
+                        <td>{{ funcionario.puntaje_cap_acumulado }}</td>
+                        <td>{{ funcionario.total_puntaje }}</td>
+                        <td>{{ funcionario.nivel_actual }}</td>
+                        <td>{{ funcionario.categoria_funcionario.nombre_cargo_funcionario }}</td>
+                        <td>{{ funcionario.capacitacion }}</td>
+                        <td>{{ funcionario.tipo_contrato.nombre_tipo_contrato }} </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-right" *ngIf="totalRegistros > 5">
+                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                Anteriores
+              </button>
+                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                Siguientes
+              </button>
             </div>
         </div>
-    </div>
-</div>
-
-
-
-<div class="card" *ngIf="!cargando">
-    <div class="card-body">
-        <h4 class="card-title">Pagination Footable</h4>
-        <h6 class="card-subtitle">Create your table with Paginated Footable</h6>
-        <label class="form-inline">Show &nbsp;
-                <select id="demo-show-entries">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select> &nbsp; entries </label>
-        <table id="demo-foo-pagination" class="table m-b-0 toggle-arrow-tiny" data-page-size="5">
-            <thead>
-                <tr>
-                    <th data-toggle="true"> First Name </th>
-                    <th> Last Name </th>
-                    <th data-hide="phone"> Job Title </th>
-                    <th data-hide="all"> DOB </th>
-                    <th data-hide="all"> Status </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Isidra</td>
-                    <td>Boudreaux</td>
-                    <td>Traffic Court Referee</td>
-                    <td>22 Jun 1972</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Shona</td>
-                    <td>Woldt</td>
-                    <td>Airline Transport Pilot</td>
-                    <td>3 Oct 1981</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Granville</td>
-                    <td>Leonardo</td>
-                    <td>Business Services Sales Representative</td>
-                    <td>19 Apr 1969</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Easer</td>
-                    <td>Dragoo</td>
-                    <td>Drywall Stripper</td>
-                    <td>13 Dec 1977</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Maple</td>
-                    <td>Halladay</td>
-                    <td>Aviation Tactical Readiness Officer</td>
-                    <td>30 Dec 1991</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Maxine</td>
-                    <td><a href="#">Woldt</a></td>
-                    <td><a href="#">Business Services Sales Representative</a></td>
-                    <td>17 Oct 1987</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Lorraine</td>
-                    <td>Mcgaughy</td>
-                    <td>Hemodialysis Technician</td>
-                    <td>11 Nov 1983</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Lizzee</td>
-                    <td><a href="#">Goodlow</a></td>
-                    <td>Technical Services Librarian</td>
-                    <td>1 Nov 1961</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Judi</td>
-                    <td>Badgett</td>
-                    <td>Electrical Lineworker</td>
-                    <td>23 Jun 1981</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Lauri</td>
-                    <td>Hyland</td>
-                    <td>Blackjack Supervisor</td>
-                    <td>15 Nov 1985</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Isidra</td>
-                    <td>Boudreaux</td>
-                    <td>Traffic Court Referee</td>
-                    <td>22 Jun 1972</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Shona</td>
-                    <td>Woldt</td>
-                    <td>Airline Transport Pilot</td>
-                    <td>3 Oct 1981</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Granville</td>
-                    <td>Leonardo</td>
-                    <td>Business Services Sales Representative</td>
-                    <td>19 Apr 1969</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Easer</td>
-                    <td>Dragoo</td>
-                    <td>Drywall Stripper</td>
-                    <td>13 Dec 1977</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Maple</td>
-                    <td>Halladay</td>
-                    <td>Aviation Tactical Readiness Officer</td>
-                    <td>30 Dec 1991</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Maxine</td>
-                    <td><a href="#">Woldt</a></td>
-                    <td><a href="#">Business Services Sales Representative</a></td>
-                    <td>17 Oct 1987</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Lorraine</td>
-                    <td>Mcgaughy</td>
-                    <td>Hemodialysis Technician</td>
-                    <td>11 Nov 1983</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Lizzee</td>
-                    <td><a href="#">Goodlow</a></td>
-                    <td>Technical Services Librarian</td>
-                    <td>1 Nov 1961</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Judi</td>
-                    <td>Badgett</td>
-                    <td>Electrical Lineworker</td>
-                    <td>23 Jun 1981</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Lauri</td>
-                    <td>Hyland</td>
-                    <td>Blackjack Supervisor</td>
-                    <td>15 Nov 1985</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Isidra</td>
-                    <td>Boudreaux</td>
-                    <td>Traffic Court Referee</td>
-                    <td>22 Jun 1972</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Shona</td>
-                    <td>Woldt</td>
-                    <td>Airline Transport Pilot</td>
-                    <td>3 Oct 1981</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Granville</td>
-                    <td>Leonardo</td>
-                    <td>Business Services Sales Representative</td>
-                    <td>19 Apr 1969</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Easer</td>
-                    <td>Dragoo</td>
-                    <td>Drywall Stripper</td>
-                    <td>13 Dec 1977</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Maple</td>
-                    <td>Halladay</td>
-                    <td>Aviation Tactical Readiness Officer</td>
-                    <td>30 Dec 1991</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Maxine</td>
-                    <td><a href="#">Woldt</a></td>
-                    <td><a href="#">Business Services Sales Representative</a></td>
-                    <td>17 Oct 1987</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Lorraine</td>
-                    <td>Mcgaughy</td>
-                    <td>Hemodialysis Technician</td>
-                    <td>11 Nov 1983</td>
-                    <td><span class="label label-table label-inverse">Disabled</span></td>
-                </tr>
-                <tr>
-                    <td>Lizzee</td>
-                    <td><a href="#">Goodlow</a></td>
-                    <td>Technical Services Librarian</td>
-                    <td>1 Nov 1961</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-                <tr>
-                    <td>Judi</td>
-                    <td>Badgett</td>
-                    <td>Electrical Lineworker</td>
-                    <td>23 Jun 1981</td>
-                    <td><span class="label label-table label-success">Active</span></td>
-                </tr>
-                <tr>
-                    <td>Lauri</td>
-                    <td>Hyland</td>
-                    <td>Blackjack Supervisor</td>
-                    <td>15 Nov 1985</td>
-                    <td><span class="label label-table label-danger">Suspended</span></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="5">
-                        <div class="text-right">
-                            <ul class="pagination pagination-split m-t-30"> </ul>
-                        </div>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
     </div>
 </div>

@@ -1,0 +1,61 @@
+<div class="row animated fadeIn" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor...</span>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="card-title">Puntaje AB</h3>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+
+                            <button [routerLink]="['/puntaje-cap-ab', 'nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                            <i class="fa fa-plus"></i>
+                            Crear Puntaje AB
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Rango mínimo</th>
+                            <th>Rango máximo</th>
+                            <th>Puntaje</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let puntaje of puntajeCapABs ">
+                            <td> {{ puntaje.rango_min }} </td>
+                            <td>{{ puntaje.rango_max }}</td>
+                            <td> {{ puntaje.puntaje }} </td>
+                            <td>
+                                <button [routerLink]="['/puntaje-cap-ab', puntaje._id ]" class="btn btn-primary">
+                                    <i class="fa fa-save"></i>
+                                </button> &nbsp;
+                                <button (click)="borrarPuntajeCapAB( puntaje )" class="btn btn-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

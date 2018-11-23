@@ -36,13 +36,14 @@ export class SidebarService {
     titulo: 'Puntajes',
     icono: 'mdi mdi-settings',
     submenu: [
-      {titulo: 'Capacitación nivel técnico', url: '/cap-nive-tecnico'},
+      {titulo: 'Capacitación nivel técnico', url: '/cap-nivel-tecnicos'},
       {titulo: 'Nota Capacitación', url: '/cap-notas'},
-      {titulo: 'Puntaje A-B', url: '/puntajeAb'},
-      {titulo: 'Puntaje C-D-E-F', url: '/puntajeCDEF'},
-      {titulo: 'Puntaje capacitación A-B', url: '/puntaje-cap-ab'},
-      {titulo: 'Puntaje capacitación C-D-E-F', url: '/puntaje-cap-cdef'},
-      {titulo: 'Puntaje experiencia', url: '/puntaje-exp'}
+      {titulo: 'Duración capacitación', url: '/horas-caps'},
+      {titulo: 'Puntaje A-B', url: '/puntajeAbs'},
+      {titulo: 'Puntaje C-D-E-F', url: '/puntajeCDEFs'},
+      {titulo: 'Puntaje capacitación A-B', url: '/puntaje-cap-abs'},
+      {titulo: 'Puntaje capacitación C-D-E-F', url: '/puntaje-cap-cdefs'},
+      {titulo: 'Puntaje experiencia', url: '/puntaje-exps'}
     ]
    }
   ];

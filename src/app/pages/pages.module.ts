@@ -25,6 +25,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+// Mantenedores
 import { CapacitacionComponent } from './capacitacion/capacitacion.component';
 import { FeriadoLegalComponent } from './feriado-legal/feriado-legal.component';
 import { FeriadoComponent } from './feriado-legal/feriado.component';
@@ -39,8 +40,23 @@ import { PermisoComponent } from './permiso/permiso.component';
 import { PermisosComponent } from './permiso/permisos.component';
 import { FuncionarioComponent } from './funcionario/funcionario.component';
 import { FuncionariosComponent } from './funcionario/funcionarios.component';
-
-
+// Puntajes
+import { CapNivelTecComponent } from './puntajes/cap-nivel-tec/cap-nivel-tec.component';
+import { CapNotaComponent } from './puntajes/cap-nota/cap-nota.component';
+import { PuntajeCapABComponent } from './puntajes/puntaje-cap-ab/puntaje-cap-ab.component';
+import { PuntajeABComponent } from './puntajes/puntaje-ab/puntaje-ab.component';
+import { PuntajeCapCDEFComponent } from './puntajes/puntaje-cap-cdef/puntaje-cap-cdef.component';
+import { PuntajeCDEFComponent } from './puntajes/puntaje-cdef/puntaje-cdef.component';
+import { PuntajeExpComponent } from './puntajes/puntaje-exp/puntaje-exp.component';
+import { CapNivelTecsComponent } from './puntajes/cap-nivel-tec/cap-nivel-tecs.component';
+import { CapNotasComponent } from './puntajes/cap-nota/cap-notas.component';
+import { PuntajesComponent } from './puntajes/puntaje-ab/puntajes.component';
+import { PuntajesCapABComponent } from './puntajes/puntaje-cap-ab/puntajes-cap-ab.component';
+import { PuntajesCapCDEFComponent } from './puntajes/puntaje-cap-cdef/puntajes-cap-cdef.component';
+import { PuntajesCDEFComponent } from './puntajes/puntaje-cdef/puntajes-cdef.component';
+import { PuntajesExpComponent } from './puntajes/puntaje-exp/puntajes-exp.component';
+import { DuracionCapComponent } from './puntajes/horasCapacitacion/duracion-cap.component';
+import { DuracionCapsComponent } from './puntajes/horasCapacitacion/duracion-caps.component';
 
 @NgModule({
     declarations: [
@@ -56,6 +72,7 @@ import { FuncionariosComponent } from './funcionario/funcionarios.component';
         ProfileComponent,
         UsuariosComponent,
         ModalUploadComponent,
+        // Mantenedores
         CapacitacionComponent,
         FeriadoLegalComponent,
         FeriadoComponent,
@@ -69,7 +86,24 @@ import { FuncionariosComponent } from './funcionario/funcionarios.component';
         PermisoComponent,
         PermisosComponent,
         FuncionarioComponent,
-        FuncionariosComponent
+        FuncionariosComponent,
+        // Puntajes
+        CapNivelTecComponent,
+        CapNotaComponent,
+        PuntajeCapABComponent,
+        PuntajeABComponent,
+        PuntajeCapCDEFComponent,
+        PuntajeCDEFComponent,
+        PuntajeExpComponent,
+        CapNivelTecsComponent,
+        CapNotasComponent,
+        PuntajesComponent,
+        PuntajesCapABComponent,
+        PuntajesCapCDEFComponent,
+        PuntajesCDEFComponent,
+        PuntajesExpComponent,
+        DuracionCapComponent,
+        DuracionCapsComponent
     ],
     exports: [
         DashboardComponent,

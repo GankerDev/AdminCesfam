@@ -9,6 +9,7 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { LoginGuardGuard } from '../services/service.index';
 import { ProfileComponent } from './profile/profile.component';
+// Mantenedores
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CapacitacionComponent } from './capacitacion/capacitacion.component';
 import { FeriadoLegalComponent } from './feriado-legal/feriado-legal.component';
@@ -24,6 +25,23 @@ import { PermisoComponent } from './permiso/permiso.component';
 import { PermisosComponent } from './permiso/permisos.component';
 import { FuncionariosComponent } from './funcionario/funcionarios.component';
 import { FuncionarioComponent } from './funcionario/funcionario.component';
+// Puntajes
+import { CapNivelTecComponent } from './puntajes/cap-nivel-tec/cap-nivel-tec.component';
+import { CapNivelTecsComponent } from './puntajes/cap-nivel-tec/cap-nivel-tecs.component';
+import { CapNotaComponent } from './puntajes/cap-nota/cap-nota.component';
+import { CapNotasComponent } from './puntajes/cap-nota/cap-notas.component';
+import { PuntajeABComponent } from './puntajes/puntaje-ab/puntaje-ab.component';
+import { PuntajesComponent } from './puntajes/puntaje-ab/puntajes.component';
+import { PuntajeCapABComponent } from './puntajes/puntaje-cap-ab/puntaje-cap-ab.component';
+import { PuntajesCapABComponent } from './puntajes/puntaje-cap-ab/puntajes-cap-ab.component';
+import { PuntajeCapCDEFComponent } from './puntajes/puntaje-cap-cdef/puntaje-cap-cdef.component';
+import { PuntajesCapCDEFComponent } from './puntajes/puntaje-cap-cdef/puntajes-cap-cdef.component';
+import { PuntajeCDEFComponent } from './puntajes/puntaje-cdef/puntaje-cdef.component';
+import { PuntajesCDEFComponent } from './puntajes/puntaje-cdef/puntajes-cdef.component';
+import { PuntajeExpComponent } from './puntajes/puntaje-exp/puntaje-exp.component';
+import { PuntajesExpComponent } from './puntajes/puntaje-exp/puntajes-exp.component';
+import { DuracionCapComponent } from './puntajes/horasCapacitacion/duracion-cap.component';
+import { DuracionCapsComponent } from './puntajes/horasCapacitacion/duracion-caps.component';
 
 const pagesRoutes: Routes = [
     {
@@ -54,6 +72,23 @@ const pagesRoutes: Routes = [
             { path: 'permiso/:id',  component: PermisoComponent, data: {titulo: 'Mantenimiento Permisos'}},
             { path: 'funcionarios',  component: FuncionariosComponent, data: {titulo: 'Mantenimiento Funcionarios'}},
             { path: 'funcionario/:id',  component: FuncionarioComponent, data: {titulo: 'Mantenimiento Funcionarios'}},
+            // Puntajes
+            { path: 'cap-nivel-tecnico/:id',  component: CapNivelTecComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'cap-nivel-tecnicos',  component: CapNivelTecsComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'cap-notas',  component: CapNotasComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'cap-nota/:id',  component: CapNotaComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntajeAbs',  component: PuntajesComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntajeAb/:id',  component: PuntajeABComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntaje-cap-abs',  component: PuntajesCapABComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntaje-cap-ab/:id',  component: PuntajeCapABComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntaje-cap-cdefs',  component: PuntajesCapCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntaje-cap-cdef/:id',  component: PuntajeCapCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntajeCDEFs',  component: PuntajesCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntajeCDEF/:id',  component: PuntajeCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntaje-exps',  component: PuntajesExpComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'puntaje-exp/:id',  component: PuntajeExpComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'horas-caps',  component: DuracionCapsComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            { path: 'horas-cap/:id',  component: DuracionCapComponent, data: {titulo: 'Mantenimiento Puntajes'}},
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }

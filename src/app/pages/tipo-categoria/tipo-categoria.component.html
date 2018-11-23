@@ -52,12 +52,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
+                <div *ngIf="totalRegistros > 5">
+                    <button (click)="cambiarDesde(-5)" class="btn btn-secondary">
                   Anteriores
                 </button>
-                <button (click)="cambiarDesde(5)" class="btn btn-secondary">
+                    <button (click)="cambiarDesde(5)" class="btn btn-secondary">
                   Siguientes
                 </button>
+                </div>
             </div>
         </div>
     </div>

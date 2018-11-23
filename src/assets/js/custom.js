@@ -7,7 +7,6 @@ File: js
 
 function init_plugins() {
 
-
     $(function() {
         "use strict";
         $(function() {
@@ -134,8 +133,6 @@ function init_plugins() {
         $(".list-task li label").click(function() {
             $(this).toggleClass("task-done");
         });
-
-
 
         // ============================================================== 
         // Collapsable cards

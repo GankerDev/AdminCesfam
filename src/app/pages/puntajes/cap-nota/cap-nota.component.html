@@ -1,0 +1,31 @@
+<div class="row animated fadeIn">
+    <div class="col-md-6 ">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Nota Capacitación</h3>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCapNota(f)">
+                        <div class="form-group">
+                            <label>Aprobación mínima</label>
+                            <input [(ngModel)]="capNota.aprobacion_minima" name="aprobacion_minima" type="number" step="any" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Aprobación máxima</label>
+                            <input [(ngModel)]="capNota.aprobacion_maxima" name="aprobacion_maxima" type="number" step="any" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Factor</label>
+                            <input [(ngModel)]="capNota.factor" name="factor" type="number" step="any" class="form-control" required>
+                        </div>
+                        <div class="text-right">
+                            <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i>
+                            Guardar</button>
+                            <a routerLink="/cap-notas" class=" btn btn-inverse waves-effect waves-light ">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

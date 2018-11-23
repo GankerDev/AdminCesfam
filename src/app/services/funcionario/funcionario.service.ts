@@ -19,14 +19,25 @@ export class FuncionarioService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarFuncionarios( desde: number = 0 ) {
-    let url = URL_SERVICIOS + '/funcionario?desde=' + desde;
+  cargarFuncionarios( desde: number = 0, todo: boolean ) {
 
-    return this.http.get(url)
-            .pipe(map((resp: any) => {
-              this.totalFuncionarios = resp.total;
-              return resp.permisos;
-            }));
+    if ( todo ) {
+      let url = URL_SERVICIOS + '/funcionario';
+
+      return this.http.get(url)
+              .pipe(map((resp: any) => {
+                this.totalFuncionarios = resp.total;
+                return resp.funcionarios;
+              }));
+    } else {
+
+      let url = URL_SERVICIOS + '/funcionario?desde=' + desde;
+      return this.http.get(url)
+              .pipe(map((resp: any) => {
+                this.totalFuncionarios = resp.total;
+                return resp.funcionarios;
+              }));
+    }
   }
 
   obtenerFuncionario( id: string ) {
