@@ -1,0 +1,79 @@
+<!-- Row -->
+<div class="row">
+    <!-- Column -->
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card">
+            <div class="card-body text-center justify-content-md-center">
+                <div class="m-t-30 "> <img [src]="funcionario.img | archivos" alt="user" class="img-circle" width="150" />
+                    <h4 class="card-title m-t-10 ">{{ funcionario.nombre }}</h4>
+                    <h6 class="card-subtitle ">{{ funcionario.categoria_funcionario.nombre_cargo_funcionario }}</h6>
+                </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div class="card-body">
+                <small class="text-muted">Rut </small>
+                <h6>{{ funcionario.rut }}</h6>
+                <small class="text-muted">Email </small>
+                <h6>{{ funcionario.email }}</h6>
+                <small class="text-muted p-t-30 db">Teléfono</small>
+                <h6>{{ funcionario.telefono }}</h6>
+                <small class="text-muted p-t-30 db">Direción</small>
+                <h6>{{ funcionario.direccion }}</h6>
+            </div>
+            <div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+    <!-- Column -->
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#puntaje" role="tab">Puntajes</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#capacitaciones" role="tab">Capacitaciones</a> </li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="puntaje" role="tabpanel">
+                    <div class="card-body">
+                        <h3 class="card-title">Puntajes</h3>
+                        <label>Puntaje capacitación acumulado:  <strong>{{ funcionario.puntaje_cap_acumulado }}</strong></label>&nbsp;
+                        <button (click)="calcularPuntajeCapacitacion(funcionario)" type="button" class="btn btn-info btn-primary waves-effect waves-light">Calcular puntaje</button>
+                        <hr>
+                        <label>Puntaje experiencia:  <strong>{{ funcionario.total_puntaje }}</strong></label>
+                    </div>
+                </div>
+                <!--Third panel -->
+                <div class="tab-pane" id="capacitaciones" role="tabpanel">
+                    <div class="card-body">
+                        <h3 class="card-title">Capacitaciones</h3>
+                        <br>
+                        <br>
+                        <h3 *ngIf="!funcionario.capacitacion">No hay registros...</h3>
+                        <table class="table table-hover table-bordered" *ngIf="funcionario.capacitacion">
+                            <thead>
+                                <tr>
+                                    <th>Capacitación</th>
+                                    <th>Nota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cap of funcionario.capacitacion">
+                                    <td>{{ cap.nombre_capacitacion }}</td>
+                                    <td>{{ cap.nota }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Column -->
+</div>
+<!-- Row -->

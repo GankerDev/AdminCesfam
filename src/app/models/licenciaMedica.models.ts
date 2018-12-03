@@ -11,6 +11,7 @@ export class LicenciaMedica {
         public renta2?: number,
         public renta3?: number,
         public promedio?: number,
+        public funcionario?: string,
         public _id?: string
     ) {}
 

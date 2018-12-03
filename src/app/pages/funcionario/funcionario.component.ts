@@ -22,6 +22,7 @@ export class FuncionarioComponent implements OnInit {
   capacitaciones: Capacitacion[] = [];
   tipoContratos: TipoContrato[] = [];
   funcionario: Funcionario = new Funcionario();
+  capacitacion: Capacitacion = new Capacitacion();
 
   constructor(
     public _funcionarioService: FuncionarioService,
@@ -41,11 +42,11 @@ export class FuncionarioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._categoriaService.cargarCategorias()
+    this._categoriaService.cargarCategorias(null, true)
         .subscribe( categoria => this.categorias = categoria );
-    this._capacitacionService.cargarCapacitaciones()
+    this._capacitacionService.cargarCapacitacion(null, true)
         .subscribe( capacitacion => this.capacitaciones = capacitacion );
-    this._tipoContratoservice.cargarTipoContrato()
+    this._tipoContratoservice.cargarTipoContrato(null, true)
         .subscribe( tipoContrato => this.tipoContratos = tipoContrato );
   }
 
@@ -61,15 +62,26 @@ export class FuncionarioComponent implements OnInit {
   }
 
   guardarFuncionario(f: NgForm) {
+    let nota = f.value.nota;
     if ( f.invalid ) {
       return;
+    }
+
+    for (const cap of this.funcionario.capacitacion) {
+
     }
 
     this._funcionarioService.guardarFuncionario( this.funcionario )
         .subscribe( funcionario => {
           this.funcionario = funcionario;
-          this.router.navigate(['/funcionarios']);
+          this._capacitacionService.obtenerCapacitacion(f.value.capacitacion)
+              .subscribe(capacitacion => {
+                this._capacitacionService.actualizarCapacitacion(capacitacion, nota)
+              .subscribe();
+              });
+           this.router.navigate(['/funcionarios']);
         });
+
   }
 
 }

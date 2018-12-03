@@ -29,7 +29,7 @@ export class TipoPermisoComponent implements OnInit {
   cargarTipoPermiso() {
     this.cargando = true;
 
-    this._tipoPermisoService.cargarTipoPermiso(this.desde)
+    this._tipoPermisoService.cargarTipoPermiso(this.desde, false)
         .subscribe( (tipoPermisos: any) => {
           this.totalRegistros = this._tipoPermisoService.totalTipoPermisos;
           this.tipoPermisos = tipoPermisos;
@@ -37,21 +37,6 @@ export class TipoPermisoComponent implements OnInit {
         });
 
   }
-
-//  buscarTipoPermiso( termino: string ) {
-//    if ( termino.length <= 0 ) {
-//      this.cargarTipoPermiso();
-//      return;
-//    }
-//
-//    this.cargando = true;
-//
-//    this._tipoPermisoService.buscarTipoPermiso( termino )
-//        .subscribe( tipoPermiso => {
-//  this.cargando = false;
-//  this.tipoPermisos = tipoPermiso;
-//  });
-// }
 
   guardarTipoPermiso( tipoPermiso: TipoPermiso ) {
     this._tipoPermisoService.actualizarTipoPermiso( tipoPermiso )

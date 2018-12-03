@@ -48,6 +48,7 @@
                             <th>Fecha inicio</th>
                             <th>Fecha termino</th>
                             <th>Días restantes</th>
+                            <th>Funcionario</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -55,9 +56,10 @@
                         <tr *ngFor="let feriado of feriados">
                             <td>{{ feriado.dias_vacaciones_fijos }}</td>
                             <td>{{ feriado.dias_vacaciones_acumulados }}</td>
-                            <td>{{ feriado.fecha_inicio_vacaciones | date:'yyyy-MM-dd' }}</td>
-                            <td>{{ feriado.fecha_termino_vacaciones | date:'yyyy-MM-dd' }}</td>
+                            <td>{{ feriado.fecha_inicio_vacaciones | date:'dd-MM-yyyy' }}</td>
+                            <td>{{ feriado.fecha_termino_vacaciones | date:'dd-MM-yyyy' }}</td>
                             <td>{{ feriado.dias_vacaciones_restantes }}</td>
+                            <td>{{ feriado.funcionario.nombre }}</td>
                             <td>
                                 <button [routerLink]="['/feriado', feriado._id ]" class="btn btn-primary">
                               <i class="fa fa-save"></i>

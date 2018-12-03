@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
+
 import { UsuarioService } from '../usuario/usuario.service';
 import { LicenciaMedica } from '../../models/licenciaMedica.models';
 
@@ -28,6 +30,10 @@ export class LicenciaMedicaService {
               this.totalLicencias = resp.total;
               console.log(resp);
               return resp.licenciasMedicas;
+            }),
+            catchError( err => {
+              swal(err.error.mensaje, err.error.errors.message, 'error');
+              return throwError(err);
             }));
   }
 
@@ -41,7 +47,11 @@ export class LicenciaMedicaService {
     let url = URL_SERVICIOS + '/licencia-medica/' + id;
     url += '?token=' + this._usuarioService.token;
     return this.http.delete(url)
-                .pipe(map(resp => swal('Licencia médica borrada', 'Eliminada correctamente', 'success')));
+                .pipe(map(resp => swal('Licencia médica borrada', 'Eliminada correctamente', 'success')),
+                catchError( err => {
+                  swal(err.error.mensaje, err.error.errors.message, 'error');
+                  return throwError(err);
+                }));
   }
 
   guardarLicencia( licenciaMedica: LicenciaMedica ) {
@@ -58,6 +68,10 @@ export class LicenciaMedicaService {
             .pipe(map((resp: any) => {
               swal('Licencia médica actualizada', '', 'success');
               return resp.licenciaMedica;
+          }),
+          catchError( err => {
+            swal(err.error.mensaje, err.error.errors.message, 'error');
+            return throwError(err);
           }));
     } else {
       // creando
@@ -66,6 +80,10 @@ export class LicenciaMedicaService {
             .pipe(map((resp: any) => {
               swal('Licencia médica creada', '', 'success');
               return resp.licenciaMedica;
+          }),
+          catchError( err => {
+            swal(err.error.mensaje, err.error.errors.message, 'error');
+            return throwError(err);
           }));
     }
 

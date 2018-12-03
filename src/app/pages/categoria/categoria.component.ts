@@ -32,7 +32,7 @@ export class CategoriaComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._tipoCategoriaService.cargarTipoCategoria()
+    this._tipoCategoriaService.cargarTipoCategoria(null, true)
         .subscribe( tipoCategorias => this.tipoCategorias = tipoCategorias );
   }
 

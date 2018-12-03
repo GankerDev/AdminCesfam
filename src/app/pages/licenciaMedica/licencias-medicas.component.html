@@ -31,6 +31,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th>Funcionario</th>
                             <th>Cantidad de licencias pedidas</th>
                             <th>Cantidad dias licencia</th>
                             <th>Desde</th>
@@ -44,6 +45,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let licencia of licencias">
+                            <td>{{ licencia.funcionario.nombre }}</td>
                             <td>{{ licencia.cant_licencias_pedidas }}</td>
                             <td>{{ licencia.cant_dias_licencia }}</td>
                             <td>{{ licencia.desde | date:'yyyy-MM-dd' }}</td>

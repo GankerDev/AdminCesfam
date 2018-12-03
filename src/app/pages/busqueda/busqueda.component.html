@@ -1,0 +1,108 @@
+<div class="row animated fadeIn">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Funcionarios</h4>
+                <table class="table table-hover" *ngIf="funcionarios.length > 0">
+                    <tbody>
+                        <tr *ngFor="let funcionario of funcionarios" [routerLink]="['/funcionario', funcionario._id]" class="pointer">
+                            <td>{{ funcionario.nombre }}</td>
+                            <td>{{ funcionario.rut}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="funcionarios.length === 0">
+                    No hay registros
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Capacitaciones</h4>
+                <table class="table table-hover" *ngIf="capacitaciones.length > 0">
+                    <tbody>
+                        <tr *ngFor="let cap of capacitaciones" [routerLink]="['/capacitacion', cap._id]" class="pointer">
+                            <td>{{ cap.nombre_capacitacion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="capacitaciones.length === 0">
+                    No hay registros
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Categorias</h4>
+                <table class="table table-hover" *ngIf="categorias.length > 0">
+                    <tbody>
+                        <tr *ngFor="let categoria of categorias" [routerLink]="['/categoria', categoria._id]" class="pointer">
+                            <td>{{ categoria.nombre_cargo_funcionario }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="categorias.length === 0">
+                    No hay registros
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn">
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tipo Categorias</h4>
+                <table class="table table-hover" *ngIf="tipoCategorias.length > 0">
+                    <tbody>
+                        <tr *ngFor="let tipo of tipoCategorias" [routerLink]="['/tipo-categoria']" class="pointer">
+                            <td>{{ tipo.nivel }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="tipoCategorias.length === 0">
+                    No hay registros
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tipo Contratos</h4>
+                <table class="table table-hover" *ngIf="tipoContratos.length > 0">
+                    <tbody>
+                        <tr *ngFor="let tipo of tipoContratos" [routerLink]="['/tipo-contrato']" class="pointer">
+                            <td>{{ tipo.nombre_tipo_contrato }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="tipoContratos.length === 0">
+                    No hay registros
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuario</h4>
+                <table class="table table-hover" *ngIf="usuarios.length > 0">
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios" [routerLink]="['/usuarios']" class="pointer">
+                            <td>{{ usuario.nombre }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert alert-info" *ngIf="usuarios.length === 0">
+                    No hay registros
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

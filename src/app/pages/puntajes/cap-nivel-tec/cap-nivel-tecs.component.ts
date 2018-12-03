@@ -39,7 +39,7 @@ export class CapNivelTecsComponent implements OnInit {
      }
 
      this._capNivelTecService.obtenerCapNivelTec( termino )
-         .subscribe( capNivelTec => this.capNivelTec = capNivelTec );
+         .subscribe( (capNivelTec: any) => this.capNivelTec = capNivelTec );
    }
 
   borrarCapNivelTec( capNivelTec: CapNivelTec ) {

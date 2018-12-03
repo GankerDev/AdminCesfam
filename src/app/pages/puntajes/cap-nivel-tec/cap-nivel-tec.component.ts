@@ -33,7 +33,7 @@ export class CapNivelTecComponent implements OnInit {
 
   cargarCapNivelTec( id: string) {
     this._capNivelTecService.obtenerCapNivelTec(id)
-        .subscribe( capNivelTec => {
+        .subscribe( (capNivelTec: any) => {
           this.capNivelTec = capNivelTec;
         });
 

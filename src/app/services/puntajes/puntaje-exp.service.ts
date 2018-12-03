@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
+
 import { UsuarioService } from '../usuario/usuario.service';
 import { PuntajeExp } from '../../models/puntajes/puntajeExp.models';
 
@@ -24,6 +26,10 @@ export class PuntajeExpService {
     return this.http.get(url)
             .pipe(map((resp: any) => {
               return resp.puntajeExp;
+            }),
+            catchError( err => {
+              swal(err.error.mensaje, err.error.errors.message, 'error');
+              return throwError(err);
             }));
   }
 
@@ -37,7 +43,11 @@ export class PuntajeExpService {
     let url = URL_SERVICIOS + '/puntaje-exp/' + id;
     url += '?token=' + this._usuarioService.token;
     return this.http.delete(url)
-                .pipe(map(resp => swal('Elemento borrado', 'Eliminado correctamente', 'success')));
+                .pipe(map(resp => swal('Elemento borrado', 'Eliminado correctamente', 'success')),
+                catchError( err => {
+                  swal(err.error.mensaje, err.error.errors.message, 'error');
+                  return throwError(err);
+                }));
   }
 
   guardarPuntajeExp( puntajeExp: PuntajeExp ) {
@@ -52,6 +62,10 @@ export class PuntajeExpService {
             .pipe(map((resp: any) => {
               swal(' Actualizado', '', 'success');
               return resp.puntajeExp;
+          }),
+          catchError( err => {
+            swal(err.error.mensaje, err.error.errors.message, 'error');
+            return throwError(err);
           }));
 
     } else {
@@ -62,6 +76,10 @@ export class PuntajeExpService {
                 .pipe(map((resp: any) => {
                   swal('Creado', '', 'success');
                   return resp.puntajeExp;
+                }),
+                catchError( err => {
+                  swal(err.error.mensaje, err.error.errors.message, 'error');
+                  return throwError(err);
                 }));
     }
 

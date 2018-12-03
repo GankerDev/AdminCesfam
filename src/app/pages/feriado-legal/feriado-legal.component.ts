@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FeriadoLegal } from '../../models/feriadoLegal.models';
 import { FeriadoLegalService } from '../../services/feriadoLegal/feriado-legal.service';
+import { Funcionario } from '../../models/funcionario.models';
 
 
 declare var swal: any;
@@ -35,16 +36,6 @@ export class FeriadoLegalComponent implements OnInit {
         });
 
   }
-
-  // buscarFeriado( termino: string ) {
-  //   if ( termino.length <= 0 ) {
-  //     this.cargarFeriados();
-  //     return;
-  //   }
-
-  //   this._feriadoLegalService.buscarFeriado( termino )
-  //       .subscribe( capacitacion => this.capacitaciones = capacitacion );
-  // }
 
   guardarFeriado( feriado: FeriadoLegal ) {
     this._feriadoLegalService.guardarFeriado( feriado )

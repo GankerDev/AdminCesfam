@@ -28,7 +28,7 @@ export class TipoContratoComponent implements OnInit {
   cargarTipoContrato() {
     this.cargando = true;
 
-    this._tipoContratoService.cargarTipoContrato(this.desde)
+    this._tipoContratoService.cargarTipoContrato(this.desde, false)
         .subscribe( (tipoContrato: any) => {
           this.totalRegistros = this._tipoContratoService.totalTipoContrato;
           this.tipoContratos = tipoContrato;

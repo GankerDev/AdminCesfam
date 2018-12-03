@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
+
 import { UsuarioService } from '../usuario/usuario.service';
 import { TipoPermiso } from '../../models/tipoPermiso.models';
 
@@ -18,13 +20,30 @@ export class TipoPermisoService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarTipoPermiso( desde: number = 0 ) {
-    let url = URL_SERVICIOS + '/tipo-permiso?desde=' + desde;
-    return this.http.get(url)
-            .pipe(map((resp: any) => {
-              this.totalTipoPermisos = resp.total;
-              return resp.tipoPermisos;
-            }));
+  cargarTipoPermiso( desde: number = 0, todo: boolean ) {
+    if (todo) {
+      let url = URL_SERVICIOS + '/tipo-permiso?todo=' + todo;
+      return this.http.get(url)
+              .pipe(map((resp: any) => {
+                this.totalTipoPermisos = resp.total;
+                return resp.tipoPermisos;
+              }),
+              catchError( err => {
+                swal(err.error.mensaje, err.error.errors.message, 'error');
+                return throwError(err);
+              }));
+    } else {
+      let url = URL_SERVICIOS + '/tipo-permiso?desde=' + desde;
+      return this.http.get(url)
+              .pipe(map((resp: any) => {
+                this.totalTipoPermisos = resp.total;
+                return resp.tipoPermisos;
+              }),
+              catchError( err => {
+                swal(err.error.mensaje, err.error.errors.message, 'error');
+                return throwError(err);
+              }));
+    }
   }
 
   obtenerTipoPermiso( id: string ) {
@@ -37,7 +56,11 @@ export class TipoPermisoService {
     let url = URL_SERVICIOS + '/tipo-permiso/' + id;
     url += '?token=' + this._usuarioService.token;
     return this.http.delete(url)
-                .pipe(map(resp => swal('Tipo de permiso borrado', 'Eliminado correctamente', 'success')));
+                .pipe(map(resp => swal('Tipo de permiso borrado', 'Eliminado correctamente', 'success')),
+                catchError( err => {
+                  swal(err.error.mensaje, err.error.errors.message, 'error');
+                  return throwError(err);
+                }));
   }
 
   crearTipoPermiso( nombre: string ) {
@@ -48,12 +71,6 @@ export class TipoPermisoService {
               .pipe(map((resp: any) => resp.tipoPermiso));
   }
 
-  // buscarTipoPermiso( termino: string ) {
-  //  let url = URL_SERVICIOS + '/busqueda/coleccion/tipoPermiso/' + termino;
-  // return this.http.get( url )
-  //             .pipe(map((resp: any) => resp.tipoContrato ));
-  // }
-
   actualizarTipoPermiso( tipoPermiso: TipoPermiso ) {
     let url =  URL_SERVICIOS + '/tipo-permiso/' + tipoPermiso._id;
     url += '?token=' + this._usuarioService.token;
@@ -62,6 +79,10 @@ export class TipoPermisoService {
             .pipe(map((resp: any) => {
               swal('Tipo permiso actualizado', '', 'success');
               return resp.tipoPermiso;
+          }),
+          catchError( err => {
+            swal(err.error.mensaje, err.error.errors.message, 'error');
+            return throwError(err);
           }));
   }
 }

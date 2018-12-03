@@ -19,6 +19,15 @@
                             <label>Fecha termino vacaciones</label>
                             <input [ngModel]="feriado.fecha_termino_vacaciones | date:'yyyy-MM-dd'" (ngModelChange)="feriado.fecha_termino_vacaciones = $event" name="fecha_termino_vacaciones" type="date" class="form-control">
                         </div>
+                        <div class="form-group">
+                            <label>Funcionario</label>
+                            <select [(ngModel)]="feriado.funcionario" name="funcionario" class="form-control" required>
+                                    <option value="">Seleccione funcionario</option>
+                                    <option *ngFor="let funcionario of funcionarios" [value]="funcionario._id">
+                                        {{ funcionario.nombre }}
+                                    </option>
+                                </select>
+                        </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                                 <i class="fa fa-save"></i>

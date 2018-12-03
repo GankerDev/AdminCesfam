@@ -28,7 +28,7 @@ export class CategoriasComponent implements OnInit {
 
   cargarCategorias() {
     this.cargando = true;
-    this._categoriaService.cargarCategorias(this.desde)
+    this._categoriaService.cargarCategorias(this.desde, false)
         .subscribe( categorias => {
           this.totalRegistros = this._categoriaService.totalCategorias;
           this.cargando = false;

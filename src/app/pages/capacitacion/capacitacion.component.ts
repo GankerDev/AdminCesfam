@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CapacitacionService } from '../../services/service.index';
+import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Capacitacion } from '../../models/capacitacion.models';
+import { CapNivelTec } from '../../models/puntajes/capacitacionNivelTecnico.models';
+import { CapacitacionService } from '../../services/capacitacion/capacitacion.service';
+import { CapNivelTecService } from '../../services/puntajes/cap-nivel-tec.service';
 
-declare var swal: any;
 
 @Component({
   selector: 'app-capacitacion',
@@ -11,98 +14,48 @@ declare var swal: any;
 })
 export class CapacitacionComponent implements OnInit {
 
-  capacitaciones: Capacitacion[] = [];
-  desde: number = 0;
-  totalRegistros: number = 0;
-  cargando: boolean = true;
-
+  capNivelTec: CapNivelTec[] = [];
+  capacitacion: Capacitacion = new Capacitacion();
 
   constructor(
-    public _capacitacionService: CapacitacionService
-  ) { }
+    public _capacitacionService: CapacitacionService,
+    public _capNivelTecService: CapNivelTecService,
+    public router: Router,
+    public activatedRoute: ActivatedRoute
+    ) {
+    activatedRoute.params.subscribe(params => {
+      let id = params['id'];
 
-  ngOnInit() {
-    this.cargarCapacitaciones();
-  }
-
-  cargarCapacitaciones() {
-    this.cargando = true;
-
-    this._capacitacionService.cargarCapacitaciones(this.desde)
-        .subscribe( (Capacitaciones: any) => {
-          this.totalRegistros = this._capacitacionService.totalCapacitaciones;
-          this.capacitaciones = Capacitaciones;
-          this.cargando = false;
-        });
-
-  }
-
-  buscarCapacitacion( termino: string ) {
-    if ( termino.length <= 0 ) {
-      this.cargarCapacitaciones();
-      return;
-    }
-
-    this.cargando = true;
-
-    this._capacitacionService.buscarCapacitacion( termino )
-        .subscribe( capacitacion => {
-          this.cargando = false;
-          this.capacitaciones = capacitacion;
-        });
-  }
-
-  guardarCapacitacion( capacitacion: Capacitacion ) {
-    this._capacitacionService.actualizarCapacitacion( capacitacion )
-        .subscribe();
-  }
-
-  borrarCapacitacion( capacitacion: Capacitacion ) {
-        swal({
-          title: '¿Esta seguro?',
-          text: 'Esta a punto de borrar la capacitación ' + capacitacion.nombre_capacitacion,
-          icon: 'warning',
-          buttons: true,
-          dangerMode: true,
-        })
-        .then( borrar => {
-          if ( borrar ) {
-            this._capacitacionService.borrarCapacitacion( capacitacion._id )
-                .subscribe(() => this.cargarCapacitaciones());
-          }
-        });
-  }
-
-  crearCapacitacion() {
-    swal({
-      title: 'Crear capacitación',
-      text: 'Ingrese el nombre de la capacitación',
-      content: 'input',
-      icon: 'info',
-      buttons: true,
-      dangerMode: true,
-    }).then( (valor: string) => {
-      if (!valor || valor.length === 0) {
-        return;
+      if ( id !== 'nuevo' ) {
+        this.cargarCapacitacion( id );
       }
-
-      this._capacitacionService.crearCapacitacion(valor, null)
-          .subscribe(() => this.cargarCapacitaciones());
     });
   }
 
-  cambiarDesde(valor: number) {
-    let desde = this.desde + valor;
-
-    if (desde >= this.totalRegistros) {
-      return;
-    }
-
-    if (desde < 0) {
-      return;
-    }
-
-    this.desde += valor;
-    this.cargarCapacitaciones();
+  ngOnInit() {
+    this._capNivelTecService.cargarCapNivelTec()
+        .subscribe( capNivelTec => this.capNivelTec = capNivelTec );
   }
+
+  cargarCapacitacion( id: string) {
+    this._capacitacionService.obtenerCapacitacion(id)
+        .subscribe( capacitacion => {
+          this.capacitacion = capacitacion;
+          this.capacitacion.cap_nivel_tecnico = capacitacion.cap_nivel_tecnico;
+        });
+
+  }
+
+  guardarCapacitacion(f: NgForm) {
+    if ( f.invalid ) {
+      return;
+    }
+
+    this._capacitacionService.guardarCapacitacion( this.capacitacion )
+        .subscribe( capacitacion => {
+          this.capacitacion = capacitacion;
+          this.router.navigate(['/capacitaciones']);
+        });
+  }
+
 }

@@ -15,7 +15,8 @@ export { PuntajeCDEFService } from './puntajes/puntaje-cdef.service';
 export { PuntajeExpService } from './puntajes/puntaje-exp.service';
 export { HorasCapService } from './puntajes/horas-cap.service';
 
-
+// Guards
+export { AdminGuard } from './guards/admin.guard';
 export { LoginGuardGuard } from './guards/login-guard.guard';
 
 export { SubirArchivoService } from './subirArchivo/subir-archivo.service';

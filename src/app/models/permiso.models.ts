@@ -8,6 +8,7 @@ export class Permiso {
         public dias_adm_fijos?: number,
         public dias_adm_acumulados?: number,
         public tipoPermisos?: string,
+        public funcionario?: string,
         public _id?: string
     ) {}
 

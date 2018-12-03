@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
-import { map } from 'rxjs/operators';
+
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
+
 import { UsuarioService } from '../usuario/usuario.service';
 import { Permiso } from '../../models/permiso.models';
 
@@ -26,6 +29,10 @@ export class PermisoService {
             .pipe(map((resp: any) => {
               this.totalPermisos = resp.total;
               return resp.permisos;
+            }),
+            catchError( err => {
+              swal(err.error.mensaje, err.error.errors.message, 'error');
+              return throwError(err);
             }));
   }
 
@@ -39,7 +46,11 @@ export class PermisoService {
     let url = URL_SERVICIOS + '/permiso/' + id;
     url += '?token=' + this._usuarioService.token;
     return this.http.delete(url)
-                .pipe(map(resp => swal('Permiso borrado', 'Eliminado correctamente', 'success')));
+                .pipe(map(resp => swal('Permiso borrado', 'Eliminado correctamente', 'success')),
+                catchError( err => {
+                  swal(err.error.mensaje, err.error.errors.message, 'error');
+                  return throwError(err);
+                }));
   }
 
   guardarPermiso( permiso: Permiso ) {
@@ -54,6 +65,10 @@ export class PermisoService {
             .pipe(map((resp: any) => {
               swal('Permiso actualizado', '', 'success');
               return resp.permiso;
+          }),
+          catchError( err => {
+            swal(err.error.mensaje, err.error.errors.message, 'error');
+            return throwError(err);
           }));
 
     } else {
@@ -64,6 +79,10 @@ export class PermisoService {
                 .pipe(map((resp: any) => {
                   swal('Permiso creado', '' , 'success');
                   return resp.permiso;
+                }),
+                catchError( err => {
+                  swal(err.error.mensaje, err.error.errors.message, 'error');
+                  return throwError(err);
                 }));
     }
 

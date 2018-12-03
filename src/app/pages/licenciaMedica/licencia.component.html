@@ -42,6 +42,15 @@
                             <label>Renta 3</label>
                             <input [(ngModel)]="licencia.renta3" name="renta3" type="number" class="form-control" min="0">
                         </div>
+                        <div class="form-group">
+                            <label>Funcionario</label>
+                            <select [(ngModel)]="licencia.funcionario" name="funcionario" class="form-control" required>
+                                        <option value="">Seleccione funcionario</option>
+                                        <option *ngFor="let funcionario of funcionarios" [value]="funcionario._id">
+                                            {{ funcionario.nombre }}
+                                        </option>
+                                    </select>
+                        </div>
                         <div class="text-right">
                             <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                               <i class="fa fa-save"></i>

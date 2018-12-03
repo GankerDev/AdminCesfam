@@ -28,7 +28,7 @@ export class TipoCategoriaComponent implements OnInit {
   cargarTipoCategoria() {
     this.cargando = true;
 
-    this._tipoCategoriaService.cargarTipoCategoria(this.desde)
+    this._tipoCategoriaService.cargarTipoCategoria(this.desde, false)
         .subscribe( (tipoCategorias: any) => {
           this.totalRegistros = this._tipoCategoriaService.totalTipoCategoria;
           this.tipoCategorias = tipoCategorias;

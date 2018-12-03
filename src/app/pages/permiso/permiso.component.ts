@@ -5,7 +5,8 @@ import { TipoPermiso } from '../../models/tipoPermiso.models';
 import { Permiso } from '../../models/permiso.models';
 import { PermisoService } from '../../services/permiso/permiso.service';
 import { TipoPermisoService } from '../../services/service.index';
-
+import { Funcionario } from '../../models/funcionario.models';
+import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 
 @Component({
   selector: 'app-permiso',
@@ -16,9 +17,11 @@ export class PermisoComponent implements OnInit {
 
   tipoPermisos: TipoPermiso[] = [];
   permiso: Permiso = new Permiso();
+  funcionarios: Funcionario[] = [];
 
   constructor(
     public _permisoService: PermisoService,
+    public _funcionarioService: FuncionarioService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
     public _tipoPermisoService: TipoPermisoService
@@ -33,8 +36,10 @@ export class PermisoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._tipoPermisoService.cargarTipoPermiso()
+    this._tipoPermisoService.cargarTipoPermiso(null, true)
         .subscribe( tipoPermiso => this.tipoPermisos = tipoPermiso );
+    this._funcionarioService.cargarFuncionarios(null, true)
+        .subscribe( funcionarios => this.funcionarios = funcionarios );
   }
 
   cargarPermiso( id: string) {
@@ -42,6 +47,7 @@ export class PermisoComponent implements OnInit {
         .subscribe( permiso => {
           this.permiso = permiso;
           this.permiso.tipoPermisos = permiso.tipoPermisos;
+          this.permiso.funcionario = permiso.funcionario._id;
         });
 
   }

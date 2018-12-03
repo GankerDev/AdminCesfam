@@ -65,13 +65,17 @@
                     </div>
                     <div class="form-group row">
                         <label for="capacitacion" class="col-2 col-form-label">Capacitación</label>
-                        <div class="col-10">
+                        <div class="col-4">
                             <select [(ngModel)]="funcionario.capacitacion" name="capacitacion" class="custom-select col-12" id="capacitacion">
                                 <option selected="">Seleccione una capacitación</option>
                                 <option *ngFor="let capacitacion of capacitaciones " [value]="capacitacion._id">
                                     {{ capacitacion.nombre_capacitacion }}
                                 </option>
                             </select>
+                        </div>
+                        <div *ngIf="funcionario.capacitacion">
+                            <label for="email" class="col-form-label">Nota </label> &nbsp;
+                            <input [(ngModel)]="funcionario.capacitacion.nota " name="nota" class="col-6 form-control" type="number" step="any" min="4" max="7">
                         </div>
                     </div>
                     <div class="form-group row">

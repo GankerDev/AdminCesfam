@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
+
 import { UsuarioService } from '../usuario/usuario.service';
 import { TipoCategoria } from '../../models/tipoCategoria.models';
 
@@ -19,13 +21,30 @@ export class TipoCategoriaService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarTipoCategoria( desde: number = 0 ) {
-    let url = URL_SERVICIOS + '/tipo-categoria?desde=' + desde;
-    return this.http.get(url)
-            .pipe(map((resp: any) => {
-              this.totalTipoCategoria = resp.total;
-              return resp.tipoCategorias;
-            }));
+  cargarTipoCategoria( desde: number = 0, todo: boolean ) {
+    if (todo) {
+      let url = URL_SERVICIOS + '/tipo-categoria?todo=' + todo;
+      return this.http.get(url)
+              .pipe(map((resp: any) => {
+                this.totalTipoCategoria = resp.total;
+                return resp.tipoCategorias;
+              }),
+              catchError( err => {
+                swal(err.error.mensaje, err.error.errors.message, 'error');
+                return throwError(err);
+              }));
+    } else {
+      let url = URL_SERVICIOS + '/tipo-categoria?desde=' + desde;
+      return this.http.get(url)
+              .pipe(map((resp: any) => {
+                this.totalTipoCategoria = resp.total;
+                return resp.tipoCategorias;
+              }),
+              catchError( err => {
+                swal(err.error.mensaje, err.error.errors.message, 'error');
+                return throwError(err);
+              }));
+    }
   }
 
   obtenerTipoCategoria( id: string ) {
@@ -38,7 +57,11 @@ export class TipoCategoriaService {
     let url = URL_SERVICIOS + '/tipo-categoria/' + id;
     url += '?token=' + this._usuarioService.token;
     return this.http.delete(url)
-                .pipe(map(resp => swal('Tipo de categría borrada', 'Eliminada correctamente', 'success')));
+                .pipe(map(resp => swal('Tipo de categría borrada', 'Eliminada correctamente', 'success')),
+                catchError( err => {
+                  swal(err.error.mensaje, err.error.errors.message, 'error');
+                  return throwError(err);
+                }));
   }
 
   crearTipoCategoria( nivel: string ) {
@@ -63,6 +86,10 @@ export class TipoCategoriaService {
             .pipe(map((resp: any) => {
               swal('Tipo categoría actualizada', '', 'success');
               return resp.tipoCategoria;
+          }),
+          catchError( err => {
+            swal(err.error.mensaje, err.error.errors.message, 'error');
+            return throwError(err);
           }));
   }
 }

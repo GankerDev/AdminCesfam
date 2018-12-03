@@ -6,6 +6,7 @@ export class FeriadoLegal {
         public fecha_inicio_vacaciones?: Date,
         public fecha_termino_vacaciones?: Date,
         public dias_vacaciones_restantes?: number,
+        public funcionario?: string,
         public _id?: string
     ) {}
 

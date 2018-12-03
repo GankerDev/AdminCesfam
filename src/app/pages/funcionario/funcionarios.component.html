@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <table id="demo-foo-pagination" class="footable table m-b-0 toggle-arrow-tiny" data-page-size="5">
+            <table id="demo-foo-pagination" class="footable table m-b-0 toggle-arrow-tiny" data-page-size="12">
                 <thead>
                     <tr>
                         <th data-toggle="true"> Imágen </th>
@@ -62,18 +62,21 @@
                 <tbody>
                     <tr *ngFor="let funcionario of funcionarios">
                         <td>
-                            <img (click)="mostrarModal( funcionario._id )" [src]="funcionario.img | archivos" class="img-50 img-circle pointer">
+                            <img (click)="mostrarModal( funcionario._id )" [src]="funcionario.img | archivos:'funcionario'" class="img-50 img-circle pointer">
                         </td>
                         <td>{{ funcionario.nombre }}</td>
                         <td>{{ funcionario.rut }}</td>
                         <td>{{ funcionario.email }}</td>
                         <td>
                             <button [routerLink]="['/funcionario', funcionario._id]" class="btn btn-primary">
-                            <i class="fa fa-save"></i>
-                        </button> &nbsp;
+                                <i class="fa fa-save"></i>
+                            </button> &nbsp;
                             <button (click)="borrarFuncionario( funcionario )" class="btn btn-danger">
-                            <i class="fa fa-trash-o"></i>
-                        </button>
+                                <i class="fa fa-trash-o"></i>
+                            </button> &nbsp;
+                            <button [routerLink]="['/puntaje', funcionario._id]" class="btn btn-primary">
+                                Puntaje
+                            </button>
                         </td>
                         <td>{{ funcionario.telefono }}</td>
                         <td>{{ funcionario.fecha_nacimiento | date:'dd-MM-yyyy' }}</td>
@@ -82,9 +85,15 @@
                         <td>{{ funcionario.puntaje_cap_acumulado }}</td>
                         <td>{{ funcionario.total_puntaje }}</td>
                         <td>{{ funcionario.nivel_actual }}</td>
+
                         <td>{{ funcionario.categoria_funcionario.nombre_cargo_funcionario }}</td>
-                        <td>{{ funcionario.capacitacion }}</td>
+                        <td>
+                            <label *ngFor="let cap of funcionario.capacitacion"> 
+                                {{ cap.nombre_capacitacion }}, 
+                            </label>
+                        </td>
                         <td>{{ funcionario.tipo_contrato.nombre_tipo_contrato }} </td>
+
                     </tr>
                 </tbody>
             </table>

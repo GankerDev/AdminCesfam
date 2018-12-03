@@ -7,7 +7,7 @@
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarPuntajeAB(f)">
                         <div class="form-group">
                             <label>Nivel</label>
-                            <input [(ngModel)]="puntajeAB.nivel" name="nivel" type="text" class="form-control" required>
+                            <input [(ngModel)]="puntajeAB.nivel" name="nivel" type="number" min="1" max="15" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Rango mínimo</label>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FuncionarioService } from '../../services/service.index';
 import { Funcionario } from '../../models/funcionario.models';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { Capacitacion } from 'src/app/models/capacitacion.models';
+
 
 declare var swal: any;
 
@@ -13,6 +15,7 @@ declare var swal: any;
 export class FuncionariosComponent implements OnInit {
 
   funcionarios: Funcionario[] = [];
+  capacitaciones: Capacitacion[] = [];
   cargando: boolean = true;
   desde: number = 0;
   totalRegistros: number = 0;
@@ -35,7 +38,6 @@ export class FuncionariosComponent implements OnInit {
           this.totalRegistros = this._funcionarioService.totalFuncionarios;
           this.cargando = false;
           this.funcionarios = funcionarios;
-          console.log(funcionarios);
         });
 
   }
@@ -82,7 +84,7 @@ export class FuncionariosComponent implements OnInit {
   }
 
   mostrarModal( id: string ) {
-    this._modalUploadService.mostrarModal( 'usuario', id );
+    this._modalUploadService.mostrarModal( 'funcionario', id );
 
   }
 

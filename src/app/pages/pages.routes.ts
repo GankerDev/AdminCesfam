@@ -7,7 +7,11 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+
+// Guards
 import { LoginGuardGuard } from '../services/service.index';
+import { AdminGuard } from '../services/guards/admin.guard';
+
 import { ProfileComponent } from './profile/profile.component';
 // Mantenedores
 import { UsuariosComponent } from './usuarios/usuarios.component';
@@ -25,6 +29,7 @@ import { PermisoComponent } from './permiso/permiso.component';
 import { PermisosComponent } from './permiso/permisos.component';
 import { FuncionariosComponent } from './funcionario/funcionarios.component';
 import { FuncionarioComponent } from './funcionario/funcionario.component';
+import { PuntajeComponent } from './funcionario/puntaje.component';
 // Puntajes
 import { CapNivelTecComponent } from './puntajes/cap-nivel-tec/cap-nivel-tec.component';
 import { CapNivelTecsComponent } from './puntajes/cap-nivel-tec/cap-nivel-tecs.component';
@@ -42,6 +47,8 @@ import { PuntajeExpComponent } from './puntajes/puntaje-exp/puntaje-exp.componen
 import { PuntajesExpComponent } from './puntajes/puntaje-exp/puntajes-exp.component';
 import { DuracionCapComponent } from './puntajes/horasCapacitacion/duracion-cap.component';
 import { DuracionCapsComponent } from './puntajes/horasCapacitacion/duracion-caps.component';
+import { CapacitacionesComponent } from './capacitacion/capacitaciones.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 const pagesRoutes: Routes = [
     {
@@ -56,39 +63,116 @@ const pagesRoutes: Routes = [
             { path: 'rxjs',  component: RxjsComponent, data: {titulo: 'RxJs'}},
             { path: 'account-settings',  component: AccountSettingsComponent, data: {titulo: 'Ajustes del tema'}},
             { path: 'perfil',  component: ProfileComponent, data: {titulo: 'Perfil de usuario'}},
+            { path: 'busqueda/:termino',  component: BusquedaComponent, data: {titulo: 'Buscador'}},
             // Mantenimientos
-            { path: 'usuarios',  component: UsuariosComponent, data: {titulo: 'Mantenimiento de usuarios'}},
-            { path: 'capacitacion',  component: CapacitacionComponent, data: {titulo: 'Mantenimiento de capacitaciones'}},
+            {
+                path: 'usuarios',
+                component: UsuariosComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento de usuarios'}
+            },
+            { path: 'capacitaciones',  component: CapacitacionesComponent, data: {titulo: 'Mantenimiento de capacitaciones'}},
+            {
+                path: 'capacitacion/:id',
+                component: CapacitacionComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento de capacitaciones'}
+            },
             { path: 'feriado-legal',  component: FeriadoLegalComponent, data: {titulo: 'Mantenimiento de feriados legales'}},
-            { path: 'feriado/:id',  component: FeriadoComponent, data: {titulo: 'Actualizar feriado legal'}},
+            {
+                path: 'feriado/:id',
+                component: FeriadoComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Actualizar feriado legal'}
+            },
             { path: 'licencia-medica',  component: LicenciasMedicasComponent, data: {titulo: 'Mantenimiento de licencias médicas'}},
-            { path: 'licencia/:id',  component: LicenciaComponent, data: {titulo: 'Actualizar licencia médica'}},
+            {
+                path: 'licencia/:id',
+                component: LicenciaComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Actualizar licencia médica'}
+            },
             { path: 'tipo-categoria',  component: TipoCategoriaComponent, data: {titulo: 'Mantenimiento Tipo Categoría'}},
             { path: 'tipo-contrato',  component: TipoContratoComponent, data: {titulo: 'Mantenimiento Tipo Contrato'}},
             { path: 'tipo-permiso',  component: TipoPermisoComponent, data: {titulo: 'Mantenimiento Tipo Permiso'}},
             { path: 'categorias',  component: CategoriasComponent, data: {titulo: 'Mantenimiento Categorías'}},
-            { path: 'categoria/:id',  component: CategoriaComponent, data: {titulo: 'Mantenimiento Categoría'}},
+            {
+                path: 'categoria/:id',
+                component: CategoriaComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Categoría'}
+            },
             { path: 'permisos',  component: PermisosComponent, data: {titulo: 'Mantenimiento Permisos'}},
-            { path: 'permiso/:id',  component: PermisoComponent, data: {titulo: 'Mantenimiento Permisos'}},
+            {
+                path: 'permiso/:id',
+                component: PermisoComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Permisos'}
+            },
             { path: 'funcionarios',  component: FuncionariosComponent, data: {titulo: 'Mantenimiento Funcionarios'}},
-            { path: 'funcionario/:id',  component: FuncionarioComponent, data: {titulo: 'Mantenimiento Funcionarios'}},
+            {
+                path: 'funcionario/:id',
+                component: FuncionarioComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Funcionarios'}
+            },
+            { path: 'puntaje/:id',  component: PuntajeComponent, data: {titulo: 'Mantenimiento Funcionarios'}},
             // Puntajes
-            { path: 'cap-nivel-tecnico/:id',  component: CapNivelTecComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'cap-nivel-tecnico/:id',
+                component: CapNivelTecComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}
+            },
             { path: 'cap-nivel-tecnicos',  component: CapNivelTecsComponent, data: {titulo: 'Mantenimiento Puntajes'}},
             { path: 'cap-notas',  component: CapNotasComponent, data: {titulo: 'Mantenimiento Puntajes'}},
-            { path: 'cap-nota/:id',  component: CapNotaComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'cap-nota/:id',
+                component: CapNotaComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}
+            },
             { path: 'puntajeAbs',  component: PuntajesComponent, data: {titulo: 'Mantenimiento Puntajes'}},
-            { path: 'puntajeAb/:id',  component: PuntajeABComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'puntajeAb/:id',
+                component: PuntajeABComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}
+            },
             { path: 'puntaje-cap-abs',  component: PuntajesCapABComponent, data: {titulo: 'Mantenimiento Puntajes'}},
-            { path: 'puntaje-cap-ab/:id',  component: PuntajeCapABComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'puntaje-cap-ab/:id',
+                component: PuntajeCapABComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}
+            },
             { path: 'puntaje-cap-cdefs',  component: PuntajesCapCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
-            { path: 'puntaje-cap-cdef/:id',  component: PuntajeCapCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'puntaje-cap-cdef/:id',
+                component: PuntajeCapCDEFComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}
+            },
             { path: 'puntajeCDEFs',  component: PuntajesCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
-            { path: 'puntajeCDEF/:id',  component: PuntajeCDEFComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'puntajeCDEF/:id',
+                component: PuntajeCDEFComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}
+            },
             { path: 'puntaje-exps',  component: PuntajesExpComponent, data: {titulo: 'Mantenimiento Puntajes'}},
-            { path: 'puntaje-exp/:id',  component: PuntajeExpComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'puntaje-exp/:id',
+                component: PuntajeExpComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}
+            },
             { path: 'horas-caps',  component: DuracionCapsComponent, data: {titulo: 'Mantenimiento Puntajes'}},
-            { path: 'horas-cap/:id',  component: DuracionCapComponent, data: {titulo: 'Mantenimiento Puntajes'}},
+            {
+                path: 'horas-cap/:id',
+                component: DuracionCapComponent,
+                canActivate: [AdminGuard],
+                data: {titulo: 'Mantenimiento Puntajes'}},
             { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
         ]
     }
