@@ -83,7 +83,7 @@ export class FuncionarioService {
               return resp.funcionario;
           }),
           catchError( err => {
-            swal(err.error.mensaje, err.error.errors.message, 'error');
+            swal(err.error.mensaje, '', 'error');
             return throwError(err);
           }));
 
@@ -120,7 +120,24 @@ export class FuncionarioService {
           swal(err.error.mensaje, err.error.errors.message, 'error');
           return throwError(err);
         }));
+  }
 
+  actualizarPuntajeTotal( funcionario: Funcionario, total: number ) {
+    let url = URL_SERVICIOS + '/funcionario';
+    url += '/' + funcionario._id;
+    url += '?token=' + this._usuarioService.token;
+
+    funcionario.total_puntaje = Math.round(total);
+
+    return this.http.put( url, funcionario )
+          .pipe(map((resp: any) => {
+            swal('Puntaje actualizado', 'correctamente', 'success');
+            return;
+        }),
+        catchError( err => {
+          swal(err.error.mensaje, err.error.errors.message, 'error');
+          return throwError(err);
+        }));
   }
 
   buscarFuncionario( termino: string ) {

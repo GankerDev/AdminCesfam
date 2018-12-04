@@ -44,7 +44,12 @@
                         <label>Puntaje capacitación acumulado:  <strong>{{ funcionario.puntaje_cap_acumulado }}</strong></label>&nbsp;
                         <button (click)="calcularPuntajeCapacitacion(funcionario)" type="button" class="btn btn-info btn-primary waves-effect waves-light">Calcular puntaje</button>
                         <hr>
-                        <label>Puntaje experiencia:  <strong>{{ funcionario.total_puntaje }}</strong></label>
+                        <label>Bienios:  <strong>{{ bienio }}</strong></label>
+                        <br>
+                        <label>Puntaje experiencia:  <strong>{{ puntajeExp }}</strong></label>
+                        <hr>
+                        <label>Total puntaje: {{ funcionario.total_puntaje }}</label>&nbsp;
+                        <button (click)="totalPuntaje(funcionario)" type="button" class="btn btn-info btn-primary waves-effect waves-light">Calcular total</button>
                     </div>
                 </div>
                 <!--Third panel -->

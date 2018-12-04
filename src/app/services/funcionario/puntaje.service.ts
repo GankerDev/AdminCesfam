@@ -4,6 +4,7 @@ import { URL_SERVICIOS } from '../../config/config';
 
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
+import { pipe } from 'rxjs';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class PuntajeService {
     puntajeDuracion: Number;
     factorNota: Number;
     factorNivel: Number;
-
+    nivelBienio: Number;
+    puntajeExperiencia: Number;
   constructor(
     public http: HttpClient,
   ) { }
@@ -50,6 +52,14 @@ export class PuntajeService {
           swal(err.error.mensaje, err.error.errors.message, 'error');
           return throwError(err);
         }));
-
   }
+    obtenerPuntajeBienio(bienio: number) {
+        let url = URL_SERVICIOS + '/calcular-puntaje/puntaje-exp/' + bienio;
+        return this.http.get(url)
+            .pipe(map((resp: any) => {
+                this.puntajeExperiencia = resp.puntaje.puntaje;
+                return this.puntajeExperiencia;
+            }));
+    }
+
 }

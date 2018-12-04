@@ -31,6 +31,7 @@ export class PuntajeComponent implements OnInit {
   nota: number = 0;
   nivel: any;
   bienio: number = 0;
+  puntajeExp: number = 0;
 
   constructor(
     public _funcionarioService: FuncionarioService,
@@ -74,7 +75,10 @@ export class PuntajeComponent implements OnInit {
           diferencia = (inicio.diff(hoy, 'years')) * -1;
           this.bienio = diferencia / 2;
           this.bienio = Math.floor(this.bienio);
-          console.log(this.bienio);
+          this._puntajeService.obtenerPuntajeBienio(this.bienio)
+              .subscribe((puntaje: any) => {
+                this.puntajeExp = puntaje;
+              });
         });
 
   }
@@ -95,18 +99,33 @@ export class PuntajeComponent implements OnInit {
                 this.capNivelTec.factor = capNivelTec.factor;
                 totalPuntajeCap += (this.duracion * this.nota) * this.capNivelTec.factor;
                 this.funcionario.puntaje_cap_acumulado = totalPuntajeCap;
-                this.totalPuntaje(totalPuntajeCap, this.funcionario);
+                this.totalPuntajeCap(totalPuntajeCap, this.funcionario);
               });
 
         }
       });
 
   }
-  totalPuntaje(totalPuntajeCap: number, funcionario: Funcionario) {
+  totalPuntajeCap(totalPuntajeCap: number, funcionario: Funcionario) {
     this._funcionarioService.actualizarPuntaje(funcionario, totalPuntajeCap)
         .subscribe(resp => {
           swal('Puntaje actualizado', 'correctamente', 'success');
         });
+  }
+
+  totalPuntaje(funcionario: Funcionario) {
+    let total: number;
+    let totalPuntajeCap: number;
+    totalPuntajeCap = funcionario.puntaje_cap_acumulado;
+    total = this.puntajeExp + totalPuntajeCap;
+    console.log(total);
+    for (let i = 0; i <= 1; i++) {
+      this._funcionarioService.actualizarPuntajeTotal(funcionario, total)
+          .subscribe(resp => {
+            swal('Puntaje actualizado', 'correctamente', 'success');
+            return total;
+          });
+    }
   }
 
 }
