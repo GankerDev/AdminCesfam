@@ -50,7 +50,7 @@ export class TipoCategoriaService {
   obtenerTipoCategoria( id: string ) {
     let url = URL_SERVICIOS + '/tipo-categoria/' + id;
     return this.http.get(url)
-            .pipe(map((resp: any) => resp.tipoCategorias));
+            .pipe(map((resp: any) => resp.tipoCategoria));
   }
 
   borrarTipoCategoria( id: string ) {

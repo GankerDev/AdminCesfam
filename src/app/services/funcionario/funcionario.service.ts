@@ -83,7 +83,7 @@ export class FuncionarioService {
               return resp.funcionario;
           }),
           catchError( err => {
-            swal(err.error.mensaje, '', 'error');
+            swal(err.error.mensaje, err.error.errors.message, 'error');
             return throwError(err);
           }));
 
@@ -132,6 +132,24 @@ export class FuncionarioService {
     return this.http.put( url, funcionario )
           .pipe(map((resp: any) => {
             swal('Puntaje actualizado', 'correctamente', 'success');
+            return;
+        }),
+        catchError( err => {
+          swal(err.error.mensaje, err.error.errors.message, 'error');
+          return throwError(err);
+        }));
+  }
+
+  actualizaNivel(funcionario, nivel) {
+    let url = URL_SERVICIOS + '/funcionario';
+    url += '/' + funcionario._id;
+    url += '?token=' + this._usuarioService.token;
+
+    funcionario.nivel_actual = nivel;
+
+    return this.http.put( url, funcionario )
+          .pipe(map((resp: any) => {
+            swal('Nivel actualizado', 'correctamente', 'success');
             return;
         }),
         catchError( err => {

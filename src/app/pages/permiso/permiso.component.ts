@@ -56,7 +56,8 @@ export class PermisoComponent implements OnInit {
     if ( f.invalid ) {
       return;
     }
-
+    
+    this.permiso.dias_restantes = this.permiso.dias_fijos - this.permiso.tiempo_permiso;
     this._permisoService.guardarPermiso( this.permiso )
         .subscribe( permiso => {
           this.permiso = permiso;

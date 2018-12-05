@@ -13,6 +13,7 @@ import { PuntajeService } from '../../services/funcionario/puntaje.service';
 import * as moment from '../../../assets/js/moment';
 import { CapNivelTecService } from '../../services/puntajes/cap-nivel-tec.service';
 import { CapNivelTec } from '../../models/puntajes/capacitacionNivelTecnico.models';
+import { TipoCategoriaService } from '../../services/tipoCategoria/tipo-categoria.service';
 
 
 @Component({
@@ -41,7 +42,8 @@ export class PuntajeComponent implements OnInit {
     public _capacitacionService: CapacitacionService,
     public _tipoContratoservice: TipoContratoService,
     public _puntajeService: PuntajeService,
-    public _capacitacionNTService: CapNivelTecService
+    public _capacitacionNTService: CapNivelTecService,
+    public _tipoCategoriaService: TipoCategoriaService
   ) {
     activatedRoute.params.subscribe(params => {
       let id = params['id'];
@@ -80,7 +82,6 @@ export class PuntajeComponent implements OnInit {
                 this.puntajeExp = puntaje;
               });
         });
-
   }
 
   calcularPuntajeCapacitacion(funcionario: Funcionario) {
@@ -106,6 +107,7 @@ export class PuntajeComponent implements OnInit {
       });
 
   }
+
   totalPuntajeCap(totalPuntajeCap: number, funcionario: Funcionario) {
     this._funcionarioService.actualizarPuntaje(funcionario, totalPuntajeCap)
         .subscribe(resp => {
@@ -118,14 +120,30 @@ export class PuntajeComponent implements OnInit {
     let totalPuntajeCap: number;
     totalPuntajeCap = funcionario.puntaje_cap_acumulado;
     total = this.puntajeExp + totalPuntajeCap;
-    console.log(total);
     for (let i = 0; i <= 1; i++) {
       this._funcionarioService.actualizarPuntajeTotal(funcionario, total)
           .subscribe(resp => {
             swal('Puntaje actualizado', 'correctamente', 'success');
+            this.calcularNivel(funcionario, total);
             return total;
           });
     }
   }
+
+  calcularNivel(funcionario: Funcionario, total ) {
+    let categoria;
+    categoria = funcionario.categoria_funcionario;
+    this._tipoCategoriaService.obtenerTipoCategoria(categoria.tipoCategoria)
+        .subscribe((resp: any) => {
+          this._puntajeService.obtenerNivel( resp.nivel, total)
+              .subscribe((nivel: any) => {
+                this.nivel = nivel.obj;
+                this._funcionarioService.actualizaNivel(funcionario, this.nivel)
+                .subscribe(() => { return; } );
+              });
+
+        });
+  }
+
 
 }

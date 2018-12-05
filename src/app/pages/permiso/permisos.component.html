@@ -50,8 +50,6 @@
                             <th>Días fijos</th>
                             <th>Tiempo permiso</th>
                             <th>Días restantes</th>
-                            <th>Días adm fijos</th>
-                            <th>Días adm acumulados</th>
                             <th>Tipo permiso</th>
                             <th></th>
                         </tr>
@@ -63,8 +61,6 @@
                             <td> {{ permiso.dias_fijos }} </td>
                             <td> {{ permiso.tiempo_permiso }} </td>
                             <td> {{ permiso.dias_restantes }} </td>
-                            <td> {{ permiso.dias_adm_fijos }} </td>
-                            <td> {{ permiso.dias_adm_acumulados }} </td>
                             <td> {{ permiso.tipoPermisos.nombre | lowercase }} </td>
                             <td>
                                 <button [routerLink]="['/permiso', permiso._id ]" class="btn btn-primary">

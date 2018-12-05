@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Funcionario } from '../../models/funcionario.models';
 import { FuncionarioService } from '../../services/funcionario/funcionario.service';
 
+import * as moment from '../../../assets/js/moment';
+
 @Component({
   selector: 'app-feriado',
   templateUrl: './feriado.component.html',
@@ -41,18 +43,22 @@ export class FeriadoComponent implements OnInit {
           this.feriado = feriado;
           this.feriado.fecha_inicio_vacaciones = feriado.fecha_inicio_vacaciones;
           this.feriado.fecha_termino_vacaciones = feriado.fecha_termino_vacaciones;
-          this.feriado.funcionario = feriado.funcionario._id;
+          this.feriado.funcionario = feriado.funcionario;
         });
 
   }
 
   guardarFeriado(f: NgForm) {
-
+    let diferencia: number;
     if ( f.invalid ) {
       return;
     }
-    let dias = f.value.fecha_inicio_vacaciones;
+    let inicio = moment(f.value.fecha_inicio_vacaciones, 'YYYYMMDD');
+    let fin = moment(f.value.fecha_termino_vacaciones, 'YYYYMMDD');
+    diferencia = (inicio.diff(fin, 'days')) * -1;
 
+    this.feriado.dias_vacaciones_restantes = this.feriado.dias_vacaciones_fijos - diferencia;
+    this.feriado.dias_vacaciones_acumulados = this.feriado.dias_vacaciones_restantes;
     this._feriadoLegalService.guardarFeriado(this.feriado)
         .subscribe( feriado => {
           this.feriado._id = feriado._id;
