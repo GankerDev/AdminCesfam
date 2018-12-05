@@ -53,11 +53,14 @@ export class PermisoComponent implements OnInit {
   }
 
   guardarPermiso(f: NgForm) {
+    let dias_fijos;
+    let tiempo_permiso;
     if ( f.invalid ) {
       return;
     }
-    
-    this.permiso.dias_restantes = this.permiso.dias_fijos - this.permiso.tiempo_permiso;
+    dias_fijos = this.permiso.dias_fijos;
+    tiempo_permiso = this.permiso.tiempo_permiso;
+    this.permiso.dias_restantes = dias_fijos - tiempo_permiso;
     this._permisoService.guardarPermiso( this.permiso )
         .subscribe( permiso => {
           this.permiso = permiso;
